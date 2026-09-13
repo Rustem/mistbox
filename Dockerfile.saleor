@@ -1,0 +1,14 @@
+# Saleor, plus Mistbox's own save-time rules.
+#
+# Saleor's source is not patched. `mistbox_saleor` is an ordinary pip package
+# whose `saleor.plugins` entry point puts it into INSTALLED_APPS, which is what
+# lets it register a Django signal — the only extension point that can refuse a
+# `productUpdate`, since there is no synchronous product webhook.
+#
+# Upgrading Saleor is a change to the tag below, not a patch to re-apply.
+FROM ghcr.io/saleor/saleor:3.23
+
+# The published image already runs as root; leaving the user alone keeps this
+# image behaving exactly like the one it is built from.
+COPY saleor-plugin /opt/mistbox-plugin
+RUN pip install --no-cache-dir /opt/mistbox-plugin

@@ -1,0 +1,6 @@
+requests>=2.32.0
+
+# only needed to re-render the box images (seed/images/render.py);
+# the PNGs are committed, so you can skip these unless you change a colourway
+pillow>=11.0.0
+cairosvg>=2.7.0

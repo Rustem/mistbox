@@ -1,0 +1,1875 @@
+/* ------------------------------------------------------------------
+   Mistbox — brand tokens straight from the packaging spec.
+   Forest 5535 C · Fir 5605 C · Sage 5575 C · Pale Sage 5595 C
+   Gold 871 C (foil reference) · Bone (paper colour, not an ink)
+   ------------------------------------------------------------------ */
+:root {
+  --forest: #2b3a31;
+  --fir: #4a5d4e;
+  --sage: #8fa394;
+  --pale-sage: #b9c7bc;
+  --gold: #c6a462;
+  --bone: #efe9de;
+
+  /* Gold 871 C is a *foil* reference — a material, not an ink. Set as small
+     text on bone it measures 1.96:1, well under the 4.5:1 AA floor, so text
+     that happens to be gold uses this deeper draw of the same hue (4.98:1)
+     while rules, the emblem and the seal keep the foil colour. */
+  --gold-ink: #7a5f22;
+
+  --ink: var(--forest);
+  --paper: var(--bone);
+
+  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --sans: 'Jost', 'Futura', 'Century Gothic', system-ui, -apple-system, sans-serif;
+
+  /* The wordmark tracking is 0.38–0.40em and is not negotiable. */
+  --track-wordmark: 0.38em;
+  --track-support: 0.3em;
+
+  --measure: 34rem;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Support type never drops below a 12pt floor. */
+.support {
+  font-family: var(--sans);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--track-support);
+  font-size: 0.8125rem; /* 13px ≈ 12pt floor with tracking applied */
+  line-height: 1.9;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--track-wordmark);
+  /* tracking pushes the last letter right; pull the block back to centre */
+  text-indent: var(--track-wordmark);
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1.wordmark {
+  font-size: clamp(2rem, 7vw, 3.75rem);
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  margin: 0 0 1rem;
+}
+
+p {
+  margin: 0 0 1.25rem;
+  max-width: var(--measure);
+}
+
+a {
+  color: inherit;
+}
+
+/* --------------------------------------------------------- structure */
+
+.shell {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+section {
+  padding-block: clamp(2.5rem, 4.5vw, 4rem);
+}
+
+/* The hero carries the page: generous above, close to the story below. */
+.hero {
+  padding-block: clamp(4rem, 10vw, 8rem) clamp(2rem, 4vw, 3rem);
+}
+
+.story {
+  padding-block: 0 clamp(2.5rem, 4.5vw, 4rem);
+}
+
+.centred {
+  text-align: center;
+}
+
+.centred p {
+  margin-inline: auto;
+}
+
+/* The lockup — emblem, wordmark, tagline — carries its hierarchy in
+   spacing alone. There is deliberately no rule between the parts. */
+.lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  color: var(--gold);
+}
+
+.lockup .wordmark {
+  color: var(--ink);
+}
+
+.lockup .tagline {
+  color: var(--fir);
+}
+
+.tagline {
+  font-family: var(--sans);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--track-support);
+  font-size: 0.8125rem;
+  line-height: 2.2;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- tiers */
+
+.tiers {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  /* 17rem, not 20: at the site's 68rem measure a 20rem minimum fits only two
+     tracks, which wraps a third box onto a row of its own and reads as a
+     mistake rather than as a set. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  margin-top: 3rem;
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  overflow: hidden;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.tier h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.tier .price {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--fir);
+}
+
+.tier p {
+  font-size: 0.9375rem;
+  margin: 0;
+  color: var(--fir);
+}
+
+.stock {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  color: var(--fir);
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.stock[data-low='true'] {
+  color: #a8743f;
+}
+
+.stock[data-out='true'] {
+  color: #8c5b5b;
+}
+
+/* ------------------------------------------------------------ controls */
+
+.button {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: var(--track-support);
+  font-size: 0.75rem;
+  padding: 1.05rem 2.25rem 1.05rem calc(2.25rem + var(--track-support));
+  border: 1px solid var(--forest);
+  background: var(--forest);
+  color: var(--bone);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+  background: transparent;
+  color: var(--forest);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--forest);
+}
+
+.button--ghost:hover:not(:disabled) {
+  background: var(--forest);
+  color: var(--bone);
+}
+
+/* --------------------------------------------------------------- form */
+
+.form {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 38rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field label,
+legend {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  color: var(--fir);
+}
+
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  color: var(--ink);
+  border-radius: 0;
+  width: 100%;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.field textarea {
+  min-height: 7rem;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.field .hint {
+  font-size: 0.8125rem;
+  color: var(--fir);
+  line-height: 1.6;
+}
+
+fieldset {
+  border: 1px solid var(--pale-sage);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+}
+
+.row {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.checkline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkline input {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  margin-top: 0.15rem;
+  accent-color: var(--forest);
+}
+
+/* The label is the rest of the target, so the whole line is clickable. */
+.checkline {
+  padding-block: 0.5rem;
+}
+
+.checkline label {
+  cursor: pointer;
+}
+
+.checkline label {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+
+.error {
+  border: 1px solid #8c5b5b;
+  background: #f7ecec;
+  color: #6d4141;
+  padding: 1rem 1.25rem;
+  font-size: 0.9375rem;
+}
+
+/* -------------------------------------------------------------- misc */
+
+.band {
+  background: var(--forest);
+  color: var(--bone);
+}
+
+.band h2,
+.band p {
+  color: var(--bone);
+}
+
+.band .support {
+  color: var(--pale-sage);
+}
+
+footer {
+  border-top: 1px solid var(--pale-sage);
+  padding-block: 3rem;
+  text-align: center;
+  color: var(--fir);
+}
+
+/* `p` carries a max-width for measure; anything centred needs the box
+   centred too, not just the text inside it. */
+footer p,
+p.centred,
+.centred > p {
+  margin-inline: auto;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+/* `.gold` is a text class, so it takes the ink; the foil colour is applied
+   directly where it is a line or a mark. */
+.gold {
+  color: var(--gold-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* ---------------------------------------------------- box contents list */
+
+.contents-label {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  color: var(--fir);
+  margin-top: 0.5rem;
+}
+
+ul.contents {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+ul.contents li {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--fir);
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+/* the fir's dot, standing in for a bullet */
+ul.contents li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* ------------------------------------------------------------------
+   Content pages (About) — long-form copy and the placeholder gallery.
+   ------------------------------------------------------------------ */
+blockquote {
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--gold);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  opacity: 0.75;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  max-width: 60rem;
+  margin-inline: auto;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--pale-sage);
+}
+
+/* ------------------------------------------------------------------
+   Polish pass — product imagery, quiet links, and the dark-band button.
+   ------------------------------------------------------------------ */
+
+/* A hairline under the gold line, as on the belly band. */
+.rule-under {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.rule-under::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.quiet-link a {
+  display: inline-block;
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: var(--track-support);
+  font-size: 0.75rem;
+  color: var(--fir);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pale-sage);
+  /* padding gives the link a 44px tap target without moving the rule */
+  padding: 0.9rem 0.5rem 0.55rem;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.quiet-link a:hover {
+  color: var(--forest);
+  border-color: var(--gold);
+}
+
+/* ---------------------------------------------------------- tier cards */
+
+.tier:hover {
+  border-color: var(--sage);
+}
+
+.tier__shot {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--pale-sage);
+  border-bottom: 1px solid var(--pale-sage);
+}
+
+.tier__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.tier:hover .tier__shot img {
+  transform: scale(1.03);
+}
+
+.tier__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  flex: 1;
+}
+
+/* The button sits flush to the card's lower edge. */
+.tier__body .button {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* ------------------------------------------------- button on dark ground */
+
+.band .button {
+  background: transparent;
+  border-color: var(--pale-sage);
+  color: var(--bone);
+}
+
+.band .button:hover {
+  background: var(--bone);
+  border-color: var(--bone);
+  color: var(--forest);
+}
+
+.band__mark {
+  color: var(--gold);
+  display: flex;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------- content pages */
+
+/* Long-form copy sits in a measure column; the gallery is allowed to
+   breathe wider, but not so much that the two read as different pages. */
+.prose {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+.prose h2 {
+  margin-top: 2.75rem;
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-inline: 0;
+}
+
+ul.prose-list {
+  margin: 0 0 1.25rem;
+}
+
+.gallery {
+  max-width: 52rem;
+}
+
+.gallery figcaption,
+.gallery-note {
+  margin-top: 1.5rem;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--fir);
+}
+
+/* --------------------------------------------------------------- focus */
+
+a:focus-visible,
+.button:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* City / State / ZIP want proportions, not equal columns — three 12rem
+   minimums do not fit the fieldset, so ZIP was wrapping to its own line. */
+.row--address {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+@media (max-width: 34rem) {
+  .row--address {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Order tracking — the timeline, the panels, and the gated detail.
+
+   The timeline is the page's centrepiece, so it carries the only real
+   ornament: a hairline spine with the current step marked in gold. Everything
+   else stays quiet, because a customer opening this on a phone is looking for
+   one fact and should find it without reading.
+   -------------------------------------------------------------------------- */
+
+.timeline {
+  list-style: none;
+  margin: 3rem auto 0;
+  padding: 0;
+  max-width: 26rem;
+  display: grid;
+  gap: 0;
+}
+
+.timeline__step {
+  position: relative;
+  display: grid;
+  /* mark · label · time — the time column sizes to its content so the labels
+     stay left-aligned however long a timestamp is */
+  grid-template-columns: 1.75rem 1fr auto;
+  align-items: baseline;
+  gap: 0 1rem;
+  padding-block: 0.7rem;
+}
+
+/* The spine, drawn between marks rather than through them. */
+.timeline__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 0.8125rem;
+  top: 1.55rem;
+  bottom: -0.35rem;
+  width: 1px;
+  background: var(--pale-sage);
+}
+
+.timeline__mark {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  margin: 0.42rem 0 0 0.16rem;
+  border: 1px solid var(--pale-sage);
+  background: var(--paper);
+}
+
+.timeline__step--done .timeline__mark {
+  background: var(--sage);
+  border-color: var(--sage);
+}
+
+.timeline__step--now .timeline__mark {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin: 0.32rem 0 0 0.06rem;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 22%, transparent);
+}
+
+.timeline__label {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fir);
+}
+
+.timeline__step--done .timeline__label { color: var(--sage); }
+
+.timeline__step--now .timeline__label {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.timeline__when {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--sage);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__step--now .timeline__when { color: var(--fir); }
+
+.timeline__note {
+  grid-column: 2;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--fir);
+  padding-top: 0.15rem;
+}
+
+/* ---- panels -------------------------------------------------------------- */
+
+.panel {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--pale-sage);
+}
+
+.panel .contents-label { margin: 0 0 0.9rem; }
+
+.tracking {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+.tracking__carrier {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  letter-spacing: var(--track-support);
+  text-transform: uppercase;
+  color: var(--fir);
+}
+
+.tracking__number {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pale-sage);
+  /* keeps a 44px target without disturbing the baseline */
+  padding-block: 0.55rem;
+  word-break: break-all;
+}
+
+.tracking__number:hover { border-bottom-color: var(--gold); }
+
+.tracking__detail {
+  margin: 0.6rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--fir);
+}
+
+.notice {
+  /* A <p> inherits the page's reading measure; an alert should span its
+     section instead, or it reads as an aside rather than a warning. */
+  max-width: none;
+  margin: 2rem 0 0;
+  padding: 1.1rem 1.25rem;
+  border-left: 2px solid var(--gold);
+  background: color-mix(in srgb, var(--gold) 9%, transparent);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--fir);
+}
+
+.notice--problem { border-left-color: #8a3b26; background: color-mix(in srgb, #8a3b26 7%, transparent); }
+.notice strong { color: var(--ink); font-weight: 400; }
+
+/* A receipt, not the homepage's bulleted contents list: two columns, figures
+   aligned right, and no bullet. */
+.receipt { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+
+.receipt li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.receipt__rule {
+  border-top: 1px solid var(--pale-sage);
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+  color: var(--fir);
+  font-size: 0.9375rem;
+}
+
+/* Items that came inside the box: named, never priced. A "$0" beside a
+   hand-made bar reads as a bug or a slight, and neither is true. */
+.receipt__included {
+  padding-left: 1rem;
+  font-size: 0.875rem;
+  color: var(--fir);
+  border-bottom: none;
+}
+
+.receipt__total {
+  border-top: 1px solid var(--gold);
+  padding-top: 0.9rem;
+  margin-top: 0.35rem;
+}
+
+.receipt__total .price { font-family: var(--serif); font-size: 1.5rem; }
+
+.tabular { font-variant-numeric: tabular-nums; }
+.quiet { color: var(--fir); font-size: 0.9375rem; }
+
+.gift {
+  margin: 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--gold);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: var(--fir);
+  white-space: pre-line;
+}
+
+.address { margin: 0; line-height: 1.8; }
+
+/* ---- the email gate ------------------------------------------------------ */
+
+.reveal__why {
+  margin: 0 0 1.1rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--fir);
+  max-width: 30rem;
+}
+
+.reveal__row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.reveal__row input { flex: 1 1 15rem; min-width: 0; }
+.reveal__row .button { flex: 0 0 auto; }
+
+/* Two inputs and a button (email + password) read better stacked than
+   crammed onto one line. */
+.reveal__row--stacked { flex-direction: column; align-items: stretch; }
+.reveal__row--stacked input,
+.reveal__row--stacked .button { flex: none; }
+
+.reveal__error {
+  margin: 0.85rem 0 0;
+  font-size: 0.9375rem;
+  color: #8a3b26;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Packing screen. Daniya uses this standing at a table with a box open and
+   tape in one hand, so targets are large, there is one action per card, and
+   nothing is hidden behind a menu.
+   -------------------------------------------------------------------------- */
+
+/* A single column, one card per order, sized to its own content rather than
+   stretched to the screen — several are visible at once, and the list scrolls
+   with the rest of the page rather than in a viewport of its own. An earlier
+   version forced each card to fill the whole viewport with scroll-snap inside
+   a fixed-height shell; in practice that meant one thing on screen at a time
+   (hard to see what's coming), heavy-feeling scrolling, and an outer border
+   around a mostly-empty box. */
+.pack {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.pack__card {
+  width: 100%;
+  max-width: 30rem;
+  flex-shrink: 0;
+  border: 1px solid var(--pale-sage);
+  padding: 1.15rem 1.25rem 1.35rem;
+  display: grid;
+  gap: 0.5rem;
+  background: color-mix(in srgb, var(--bone) 45%, #fff);
+}
+
+.pack__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; align-items: baseline; }
+.pack__num { color: var(--sage); }
+
+.pack__stage {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.pack__lines { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--fir); }
+
+/* The packing checklist. Daniya reads this holding a carton, so it is a list
+   she can run a finger down rather than a "·"-joined sentence — with the
+   carton itself named first, because that is the thing she picks up. */
+.pack__checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fir);
+}
+
+.pack__checklist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.pack__checklist-box {
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.15rem;
+  border-bottom: 1px solid var(--pale-sage);
+  color: var(--ink);
+}
+
+.pack__qty { color: var(--ink); }
+/* The chosen flavour, called out on the packing card: it is the difference
+   between reaching for the right jar and the wrong one. */
+.pack__flavour { color: var(--ink); font-weight: 400; }
+.pack__checklist .quiet { font-size: 0.75rem; }
+.pack__to { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: var(--ink); }
+
+.pack__go {
+  margin-top: 0.6rem;
+  width: 100%;
+  /* deliberately taller than the 44px floor: this is tapped with one thumb
+     while holding a box */
+  min-height: 3.5rem;
+  font-size: 0.875rem;
+}
+
+.pack__waiting--label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+}
+
+.pack__waiting {
+  margin: 0.6rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--pale-sage);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--fir);
+}
+
+.pack__empty {
+  margin-top: 3rem;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--fir);
+}
+
+/* --------------------------------------------------------------------------
+   Admin. Same brand, but a working tool rather than a shopfront: denser, with
+   search and filters at the top where a person scans first.
+   -------------------------------------------------------------------------- */
+
+.shell--wide { max-width: 68rem; }
+
+/* Tighter top/bottom padding than the generic `section` rule (which is set
+   up for the storefront's editorial breathing room) — a working tool used
+   many times a day doesn't need as much air before the header. The page
+   scrolls as one normal document; there is no separate viewport to manage. */
+.admin-shell {
+  padding-block: 1.5rem clamp(1.25rem, 3vw, 2rem);
+}
+
+.admin-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1.25rem;
+  row-gap: 0.35rem;
+}
+
+.admin-bar__brand { display: flex; align-items: center; gap: 0.6rem; }
+
+.admin-bar__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.admin-bar__counts {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--sage);
+}
+
+.admin-bar .admin-who { margin: 0; margin-left: auto; }
+
+.admin-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* A bare `<input type="search">` renders in the browser's own UA style — a
+   thin inset grey/black border, native rounded corners, sometimes its own
+   clear button — none of which exist anywhere else on this page. Give it the
+   same treatment as every other text field on the site (`.field input`)
+   instead of leaving it as the one uncustomised control in the room. */
+.admin-search input[type='search'] {
+  flex: 1 1 18rem;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--pale-sage);
+  border-radius: 0;
+  background: #f6f2ea;
+  color: var(--ink);
+}
+
+.admin-search input[type='search']::placeholder { color: var(--sage); }
+
+.admin-search input[type='search']::-webkit-search-cancel-button,
+.admin-search input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-search input[type='search']:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--pale-sage);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--pale-sage);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fir);
+  text-decoration: none;
+  /* 44px tap target without the chip looking oversized */
+  min-height: 2.75rem;
+}
+
+.tab:hover { border-color: var(--sage); }
+
+.tab--on {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: var(--bone);
+}
+
+/* The attention tab only exists when something is wrong, so it is allowed to
+   be the one loud thing on the page. */
+.tab[href*="stage=attention"] { border-color: #8a3b26; color: #8a3b26; }
+.tab[href*="stage=attention"] .tab__count { color: #8a3b26; }
+.tab--on[href*="stage=attention"] { background: #8a3b26; border-color: #8a3b26; color: var(--bone); }
+.tab--on[href*="stage=attention"] .tab__count { color: var(--bone); }
+
+.tab__count {
+  font-variant-numeric: tabular-nums;
+  color: var(--sage);
+  font-size: 0.75rem;
+}
+
+.tab--on .tab__count { color: var(--pale-sage); }
+
+.pack__meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  font-size: 0.875rem;
+  color: var(--fir);
+}
+
+.pack__card--problem { border-color: #8a3b26; }
+
+.pack__problem {
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #8a3b26;
+}
+
+.pack__links {
+  margin: 0.9rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--pale-sage);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.8125rem;
+}
+
+.pack__links a { color: var(--fir); text-decoration-color: var(--pale-sage); }
+.pack__links a:hover { color: var(--ink); }
+
+/* ---- admin sign-in indicator ---- */
+
+.admin-who {
+  margin: 0.6rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  color: var(--sage);
+}
+
+.admin-who__signout {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--pale-sage);
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.admin-who__signout:hover { color: var(--forest); text-decoration-color: var(--gold); }
+
+/* --------------------------------------------------------------------------
+   Admin auth screens: sign in, forgot password, set a new password. One card
+   style shared by all three, built from the order form's existing .field
+   input pattern rather than inventing a second one.
+   -------------------------------------------------------------------------- */
+
+.authcard {
+  max-width: 26rem;
+  margin: 2.5rem auto 0;
+  padding: 2.25rem 2rem;
+  background: #f6f2ea;
+  border: 1px solid var(--pale-sage);
+  display: grid;
+  gap: 1.35rem;
+}
+
+.authcard__intro {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--fir);
+}
+
+.authcard .button { width: 100%; }
+
+.authcard__note {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid var(--sage);
+  background: color-mix(in srgb, var(--sage) 10%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.authcard__error {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid #8a3b26;
+  background: color-mix(in srgb, #8a3b26 7%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.authcard__error a { color: #8a3b26; text-decoration-color: color-mix(in srgb, #8a3b26 40%, transparent); }
+.authcard__error a:hover { text-decoration-color: #8a3b26; }
+
+.authcard__links {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.authcard__links a { color: var(--fir); text-decoration-color: var(--pale-sage); }
+.authcard__links a:hover { color: var(--forest); text-decoration-color: var(--gold); }
+
+/* -------------------------------------------------------- newsletter ----
+   Lives inside .band now — the dark forest closing statement — rather than
+   as its own section, so it shares that pause in the page instead of adding
+   a second one. Everything here assumes a dark ground. */
+
+.band__newsletter-intro {
+  max-width: 24rem;
+  margin: 1.75rem auto 1.25rem;
+  color: var(--pale-sage);
+  font-size: 0.9375rem;
+}
+
+.newsletter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.newsletter input {
+  flex: 1 1 15rem;
+  min-width: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  color: var(--ink);
+}
+
+.newsletter input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.newsletter .button { flex: 0 0 auto; }
+
+.newsletter__done {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--bone);
+}
+
+.newsletter__error {
+  width: 100%;
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  /* A lighter rust than the form's usual alarm colour — the dark-red on-bone
+     tone (#8a3b26) reads as almost black against this same forest ground.
+     4.92:1 on forest, clearing the 4.5 AA floor for this text's size. */
+  color: #e0937b;
+}
+
+/* --------------------------------------------------------------------------
+   The box builder. The curated selection is the starting state, so the
+   default view is a quiet list of what is inside and the editor is one tap
+   away — nobody is made to configure a gift they were happy with.
+   -------------------------------------------------------------------------- */
+
+.builder {
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.builder__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.builder__count { margin: 0; color: var(--fir); }
+.builder__count .quiet { white-space: nowrap; }
+
+.builder__toggle {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fir);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--pale-sage);
+  padding: 0 0 0.15rem;
+  cursor: pointer;
+}
+
+.builder__toggle:hover { color: var(--forest); border-color: var(--gold); }
+
+/* Our selection | Build your own. Two ways to fill the same box, so they are
+   one control with two sides rather than two buttons of unequal weight. */
+.builder__hint {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--fir);
+}
+
+/* The piece is fixed in Our selection, so it reads as a statement and must not
+   be mistaken for a control that has been disabled. */
+.slot__fixed {
+  font-size: 0.9375rem;
+  color: var(--forest);
+}
+
+.builder__summary {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fir);
+}
+
+.slots { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--pale-sage);
+}
+
+.slot:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* Emptying a slot is destructive-ish, so it stays quiet until reached for. */
+.slot__remove {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--sage);
+  background: none;
+  border: none;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.slot__remove:hover { color: #8c5b5b; background: rgba(140, 91, 91, 0.08); }
+.slot__remove:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+.slot__choices select.slot__empty { color: var(--sage); }
+
+/* The thumbnail doubles as the way in to the detail view. */
+.slot__zoom {
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  line-height: 0;
+}
+
+.slot__zoom:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* ------------------------------------------------------- item detail */
+
+.peek {
+  border: 1px solid var(--pale-sage);
+  background: var(--paper, #f7f4ed);
+  padding: 0;
+  max-width: min(30rem, calc(100vw - 2rem));
+  color: var(--forest);
+}
+
+.peek::backdrop { background: rgba(43, 58, 49, 0.55); }
+
+.peek__shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--pale-sage);
+}
+
+.peek__body { padding: 1.5rem 1.75rem 1.75rem; display: grid; gap: 0.5rem; }
+
+.peek__name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.peek__facts {
+  margin: 0.5rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+.peek__facts dt {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6875rem;
+  color: var(--sage);
+  align-self: center;
+}
+
+.peek__facts dd { margin: 0; color: var(--fir); }
+
+.peek__close {
+  justify-self: start;
+  margin-top: 1rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fir);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--pale-sage);
+  padding: 0 0 0.15rem;
+  cursor: pointer;
+}
+
+.peek__close:hover { color: var(--forest); border-color: var(--gold); }
+
+/* The chosen flavour's own photo, so a scent is something you see rather
+   than only read. */
+.slot__shot {
+  width: 72px;
+  height: 72px;
+  flex: none;
+  object-fit: cover;
+  border: 1px solid var(--pale-sage);
+  background: var(--paper);
+}
+
+.slot__shot--blank { display: block; }
+
+.slot__choices { display: grid; gap: 0.4rem; flex: 1 1 auto; min-width: 0; }
+
+.slot__choices select {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--pale-sage);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+}
+
+.slot__choices select:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+.slot__single { font-size: 0.8125rem; }
+/* The carton's own subtitle. Distinct from `.slot__single` — that one is a
+   maker's name and the summary hides it, and the carton must still say what
+   it is. */
+.slot__note { font-size: 0.8125rem; }
+
+
+/* ------------------------------------------------------------ box builder
+   Prices now sit on every row, so the summary and the slot list both need a
+   money column. `tabular` keeps the digits in line down the column — a price
+   list whose decimal points wander reads as careless. */
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+.builder__summary li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.slot__price {
+  flex: 0 0 auto;
+  font-size: 0.9375rem;
+  color: var(--fir);
+}
+
+/* The carton's own row. It is part of the receipt, not one of the pieces, so
+   it sits below them with a rule of its own rather than in the list. */
+.slot__total {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--pale-sage);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.builder__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--gold);
+}
+
+.builder__total .price {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--forest);
+}
+
+.slot--empty { opacity: 0.55; }
+
+/* --------------------------------------------------------- build your own */
+
+.build__step { padding-block: clamp(2rem, 5vw, 3.25rem); }
+
+/* A catalogue grid, not prose: the site's 68rem measure leaves room for only
+   two item columns beside the summary, which reads sparse and oversizes every
+   card. This is the one page that earns more width. */
+.shell--wide { max-width: 76rem; }
+
+.build__lede {
+  max-width: var(--measure);
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+.build__lede h2 { margin: 0.35rem 0 0.75rem; }
+.build__lede p { margin: 0; color: var(--fir); }
+
+/* Step one: the vessels. Wider than the item grid because a box is the
+   bigger decision and its photograph is doing the persuading. */
+.boxpick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  max-width: 58rem;
+  margin-inline: auto;
+}
+
+.boxpick__card {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: center;
+  text-align: center;
+  padding: 1.25rem;
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  transition: border-color 0.2s ease;
+}
+
+/* The chosen box is stated in gold rather than by a tick — one accent, and it
+   is the same one the rest of the site uses for "this one". */
+.boxpick__card[aria-current] { border-color: var(--gold); }
+
+.boxpick__shot {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--forest);
+  margin-bottom: 0.5rem;
+}
+
+.boxpick__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.boxpick__card h3 { margin: 0; font-size: 1.35rem; }
+.boxpick__holds { margin: 0; font-size: 0.875rem; }
+.boxpick__card .price { margin: 0.15rem 0 0; font-family: var(--serif); font-size: 1.4rem; }
+.boxpick__note { margin: 0 0 0.6rem; font-size: 0.8125rem; max-width: 18rem; }
+.boxpick__card .button { width: 100%; }
+
+/* Step two: the items beside the box being filled. The summary is sticky
+   because the total is the thing being watched while the grid is scrolled. */
+.build__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 21rem;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.build__items { display: grid; gap: 2.25rem; min-width: 0; }
+.build__group { display: grid; gap: 0.85rem; }
+.build__group .contents-label { margin: 0; }
+
+.build__summary { position: sticky; top: 1.5rem; }
+
+/* The summary is 21rem wide and carries a thumbnail, a name, a flavour select,
+   a price and a remove — tighter than the same row gets on `/order`. Three
+   economies buy the select enough room to show a flavour name in full:
+   a smaller thumbnail, no maker (the picker card beside it already says who
+   made it), and a quieter price. */
+.build__summary .slot__shot { width: 52px; height: 52px; }
+.build__summary .slot__single { display: none; }
+.build__summary .slot__price { font-size: 0.875rem; }
+.build__summary .slot__fixed { line-height: 1.3; }
+/* Two separate facts, and at the summary's 21rem they do not share a line
+   without breaking mid-figure. Give the weight its own — but only here: on
+   `/order` the same line has room and reads as one sentence. */
+.build__summary .builder__count .quiet { display: block; }
+
+.picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+
+.picker__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.picker__shot {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #e6ded0;
+  margin-bottom: 0.4rem;
+}
+
+.picker__shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* How many of this item are already in the box. A count reads faster than a
+   changed button label, and the button still says why it is disabled. */
+.picker__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--forest);
+  color: var(--bone);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+.picker__item h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.picker__maker { margin: 0; font-size: 0.8125rem; }
+.picker__price { margin: 0.1rem 0 0.25rem; font-family: var(--serif); font-size: 1.1rem; }
+
+/* How many of this may go in one box. Quiet while there is still room, and
+   only gold once the limit is reached — a rule you have met should look
+   answered, not like a failure. */
+.picker__cap {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--sage);
+}
+
+.picker__cap[data-at-cap] { color: var(--gold-ink); }
+
+/* The site's buttons are generously padded for a page with one of them. In a
+   grid of narrow cards that padding wraps "Add to box" onto two lines, so this
+   one keeps the type and trims the space around it. `margin-top:auto` pins it
+   to the bottom of the card, which is what keeps the buttons on one line
+   across a row when a product name wraps and its neighbour's does not. */
+.picker__add {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.7rem 0.5rem;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+@media (max-width: 60rem) {
+  .build__layout { grid-template-columns: minmax(0, 1fr); }
+  /* Below the grid the summary must not stick — it would cover the items it
+     is summarising on a short viewport. */
+  .build__summary { position: static; order: -1; }
+}
+
+/* The builder's entry on the home page. Sits below the boxes with real air
+   above it — it is an alternative to the row, not another item in it. */
+.byo { margin-top: clamp(2.5rem, 5vw, 3.75rem); }
+
+.byo__lede {
+  max-width: 30rem;
+  margin: 0 auto 1.25rem;
+  color: var(--fir);
+}
+
+/* ----------------------------------------------------- admin box sheet */
+
+.boxsheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-top: 1.5rem;
+}
+
+.boxsheet__box {
+  border: 1px solid var(--pale-sage);
+  background: #f6f2ea;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.boxsheet__head { margin-bottom: 1rem; }
+.boxsheet__head h2 { margin: 0; font-size: 1.35rem; }
+.boxsheet__head p { margin: 0.2rem 0 0; font-size: 0.875rem; }
+
+/* The SKU travels in logs and onto the packing card, so it earns a place —
+   but quietly, and in the face the rest of the system prints it in. */
+.boxsheet__sku { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.04em; }
+
+/* Something is wrong with this box: an empty slot, or a piece that has left
+   the catalogue. Neither is an error the page can fix, so it states the fact
+   and stays out of the way. */
+.boxsheet__gap {
+  color: #8c5b5b;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* A box nobody can buy. Louder than the other warnings because it is the only
+   one that is already costing orders. */
+.boxsheet__blocked {
+  background: rgba(140, 91, 91, 0.08);
+  border-left: 2px solid #8c5b5b;
+  padding: 0.6rem 0.75rem;
+  margin-top: 0.35rem;
+}
+
+/* The one link between the two halves of the admin: orders, and what the
+   boxes are worth. Quiet — it is navigation, not an action. */
+.admin-bar__nav {
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fir);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pale-sage);
+  padding-bottom: 2px;
+}
+
+.admin-bar__nav:hover { color: var(--forest); border-color: var(--gold); }
+
+/* ------------------------------------------------- dashboard embed
+   Mistbox's verdict on a box, rendered inside the Saleor dashboard's
+   right-hand column (~364px). Our own HTML on purpose: the dashboard can only
+   render an error *code* through its own translation table, so the reason a
+   box was refused cannot survive there — in Chrome it is gone before it can be
+   read. Here it says the same thing in every browser, and stays. */
+
+.embed { padding: 0.25rem 0.4rem 0.5rem 0.1rem; font-family: var(--sans); color: var(--forest); }
+.embed__note { margin: 0; font-size: 0.8125rem; line-height: 1.5; color: var(--fir); }
+.embed__foot { margin-top: 0.6rem; font-size: 0.75rem; }
+
+.verdict {
+  padding: 0.6rem 0.75rem;
+  background: rgba(143, 163, 148, 0.16);
+  border-left: 2px solid var(--sage);
+}
+
+/* A box nobody can buy. The only state that needs to raise its voice. */
+.verdict--blocked { background: rgba(140, 91, 91, 0.08); border-left-color: #8c5b5b; }
+
+.verdict__state {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fir);
+}
+
+.verdict--blocked .verdict__state { color: #8c5b5b; }
+
+.verdict__why { margin: 0.25rem 0 0; font-size: 0.8125rem; line-height: 1.5; color: var(--forest); }
+
+/* The app's own page in the dashboard — full width, unlike the sidebar panel. */
+.embed--page { max-width: 34rem; padding: 1.75rem 1.5rem; line-height: 1.6; }
+.embed--page h1 { font-family: var(--serif); font-size: 1.6rem; margin: 0 0 1rem; }
+.embed--page p { margin: 0 0 1rem; font-size: 0.875rem; color: var(--fir); }
+.embed--page strong { color: var(--forest); }
+
+/* Next's development indicator is fixed to the viewport, and inside a 364px
+   dashboard panel the viewport *is* the panel — so it sits squarely on top of
+   the verdict. Hidden on embedded pages only; the rest of the site keeps it. */
+body:has(.embed) nextjs-portal { display: none; }
+
+/* "as saved" is load-bearing, not decoration: the panel cannot see unsaved
+   chips, and without this it would claim a box is ready at the moment a save
+   is being refused. Quiet, but never absent. */
+.verdict__scope { text-transform: none; letter-spacing: 0.02em; opacity: 0.75; }
+
+.verdict__recheck {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fir);
+  cursor: pointer;
+  border-bottom: 1px solid var(--pale-sage);
+}
+
+.verdict__recheck:hover:not(:disabled) { color: var(--forest); border-color: var(--gold); }
+.verdict__recheck:disabled { opacity: 0.5; cursor: default; }

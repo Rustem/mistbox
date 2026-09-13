@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Placeholder artwork: shoreline and still water">
+  <rect width="400" height="500" fill="#efe9de"/>
+  <rect x="16" y="16" width="368" height="468" fill="none" stroke="#c6a462" stroke-width="1"/>
+  <path d="M52 232 L128 150 L182 214 L222 172 L308 268" fill="none" stroke="#4a5d4e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 300 H348" stroke="#c6a462" stroke-width="1"/>
+  <g stroke="#8fa394" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M76 336 H196"/><path d="M228 336 H324"/>
+    <path d="M96 372 H172"/><path d="M208 372 H304"/>
+    <path d="M76 408 H148"/><path d="M188 408 H332"/>
+  </g>
+</svg>

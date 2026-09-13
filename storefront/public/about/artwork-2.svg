@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Placeholder artwork: a stand of firs in thin line">
+  <rect width="400" height="500" fill="#efe9de"/>
+  <rect x="16" y="16" width="368" height="468" fill="none" stroke="#c6a462" stroke-width="1"/>
+  <g stroke="#4a5d4e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 360 L96 300 h14 L88 252 h20 L120 214 l12 38h20 L130 300h14 Z"/>
+    <path d="M120 360 v46"/>
+  </g>
+  <g stroke="#8fa394" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M248 380 L230 336 h10 L224 300 h15 L248 272 l9 28h15 L256 336h10 Z"/>
+    <path d="M248 380 v30"/>
+  </g>
+  <path d="M56 424 H344" stroke="#c6a462" stroke-width="1" stroke-dasharray="10 7"/>
+</svg>

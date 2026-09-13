@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mistbox-saleor"
+version = "0.1.0"
+description = "Mistbox's own rules, enforced inside Saleor at save time."
+requires-python = ">=3.12"
+
+# Saleor discovers external plugins through this entry point group. Two things
+# happen as a result, and the second is the one that matters here:
+#
+#   the value becomes a plugin path in settings.PLUGINS, and
+#   the *name* is appended to INSTALLED_APPS (saleor/settings.py:956).
+#
+# Being in INSTALLED_APPS is what gives this package a Django AppConfig, and
+# `ready()` is the only place a signal can be connected. Saleor's own source is
+# never modified.
+[project.entry-points."saleor.plugins"]
+mistbox_saleor = "mistbox_saleor.plugin:MistboxPlugin"
+
+[tool.setuptools]
+packages = ["mistbox_saleor"]

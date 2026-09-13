@@ -1,0 +1,419 @@
+{
+  "_comment": "PLACEHOLDER ITEM DATA. Maker names, costs, weights and dimensions below are invented stand-ins so the item-level inventory and box-builder machinery can be built and tested. They must be replaced with the real Seattle Chocolate, Franz Chocolate and Smith Tea product lists (SKU, retail pack, wholesale cost, pack weight) before launch — naming a real business you do not have an agreement with implies a partnership you do not have. Every weight here is an ESTIMATE and has never been checked against a real pack on a scale; see items[].weightKg and products[].weightKg.",
+  "channel": {
+    "name": "Mistbox US",
+    "slug": "mistbox-us",
+    "currency": "USD",
+    "country": "US"
+  },
+  "warehouse": {
+    "name": "Seattle",
+    "slug": "seattle",
+    "address": {
+      "companyName": "Mistbox",
+      "streetAddress1": "1 Pike Place",
+      "city": "Seattle",
+      "countryArea": "WA",
+      "postalCode": "98101",
+      "country": "US"
+    }
+  },
+  "shipping": {
+    "zoneName": "United States",
+    "countries": [
+      "US"
+    ],
+    "methods": [
+      {
+        "name": "Standard delivery",
+        "price": "12.00",
+        "minDays": 3,
+        "maxDays": 6
+      },
+      {
+        "name": "Free delivery over $150",
+        "price": "0.00",
+        "minimumOrderPrice": "150.00",
+        "minDays": 3,
+        "maxDays": 6
+      }
+    ]
+  },
+  "_items_comment": "An item is a PRODUCT; a flavour or scent is a VARIANT of it. That is Saleor's own model — SKU, stock and cost live on the variant — and it is what makes swapping native: choosing a different flavour is choosing a sibling variant, so the product IS the swap group and no extra grouping field is needed. Rule: same cost -> variant, different cost -> separate product. That is why the 4 oz and 8 oz candles are two products; if they were variants a customer could swap up a size and quietly move margin. weightKg, dimsIn and maxPerBox are product-wide; cost, price and stock are per variant. Items are published but visibleInListings=false — orderable, never shoppable on their own. PRICE is what the customer pays for that item inside a box; it was seeded at 2.25x cost (rounded to whole dollars), the markup implied by the old flat $88/$148 tiers, and is a plain editable number — change it here, not by changing the rule.",
+  "items": [
+    {
+      "slug": "loose-tea-50g",
+      "name": "Loose tea, 50 g tin",
+      "maker": "Fernwater Tea Co., Olympia",
+      "kind": "Tea",
+      "weightKg": 0.12,
+      "dimsIn": [
+        3.0,
+        3.0,
+        3.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "FWT-050",
+          "flavour": "Cascade black",
+          "cost": "6.50",
+          "price": "15.00",
+          "stock": 90
+        },
+        {
+          "sku": "FWT-GRN-050",
+          "flavour": "Misty green",
+          "cost": "6.50",
+          "price": "15.00",
+          "stock": 80
+        },
+        {
+          "sku": "FWT-MNT-050",
+          "flavour": "Cedar mint tisane",
+          "cost": "6.00",
+          "price": "14.00",
+          "stock": 70
+        }
+      ]
+    },
+    {
+      "slug": "loose-tea-100g",
+      "name": "Loose tea, 100 g tin",
+      "maker": "Fernwater Tea Co., Olympia",
+      "kind": "Tea",
+      "weightKg": 0.2,
+      "dimsIn": [
+        3.5,
+        3.5,
+        4.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "FWT-100",
+          "flavour": "Cascade black",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 70
+        },
+        {
+          "sku": "FWT-GRN-100",
+          "flavour": "Misty green",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 60
+        }
+      ]
+    },
+    {
+      "slug": "chocolate-bar-3oz",
+      "name": "Chocolate bar, 3 oz",
+      "maker": "Ballard & Bell, Seattle",
+      "kind": "Chocolate",
+      "weightKg": 0.1,
+      "dimsIn": [
+        5.5,
+        2.6,
+        0.4
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 24,
+      "variants": [
+        {
+          "sku": "BBC-SALT",
+          "flavour": "Alder-smoked salt",
+          "cost": "4.00",
+          "price": "9.00",
+          "stock": 140
+        },
+        {
+          "sku": "BBC-MILK",
+          "flavour": "Dark milk",
+          "cost": "3.50",
+          "price": "8.00",
+          "stock": 120
+        },
+        {
+          "sku": "BBC-TRF",
+          "flavour": "Truffle mix",
+          "cost": "4.50",
+          "price": "10.00",
+          "stock": 95
+        }
+      ]
+    },
+    {
+      "slug": "honey-4oz",
+      "name": "Honey, 4 oz",
+      "maker": "Olympic Bee Company, Sequim",
+      "kind": "Pantry",
+      "weightKg": 0.25,
+      "dimsIn": [
+        2.4,
+        2.4,
+        3.6
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "OBC-004",
+          "flavour": "Wildflower",
+          "cost": "4.50",
+          "price": "10.00",
+          "stock": 100
+        },
+        {
+          "sku": "OBC-LAV",
+          "flavour": "Lavender",
+          "cost": "5.00",
+          "price": "11.00",
+          "stock": 70
+        }
+      ]
+    },
+    {
+      "slug": "aged-tomme-6oz",
+      "name": "Aged tomme, 6 oz wedge",
+      "maker": "Skagit Flats Creamery, Mount Vernon",
+      "kind": "Pantry",
+      "weightKg": 0.19,
+      "dimsIn": [
+        4.5,
+        3.0,
+        1.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 12,
+      "variants": [
+        {
+          "sku": "SFC-TOMME",
+          "flavour": "Original",
+          "cost": "9.00",
+          "price": "20.00",
+          "stock": 40
+        }
+      ]
+    },
+    {
+      "slug": "hand-dyed-tea-towel",
+      "name": "Hand-dyed tea towel",
+      "maker": "Cedar & Cloth, Tacoma",
+      "kind": "Home",
+      "weightKg": 0.09,
+      "dimsIn": [
+        8.0,
+        5.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 16,
+      "variants": [
+        {
+          "sku": "CDC-TOWEL",
+          "flavour": "Pale sage",
+          "cost": "7.50",
+          "price": "17.00",
+          "stock": 80
+        },
+        {
+          "sku": "CDC-FIR",
+          "flavour": "Deep fir",
+          "cost": "7.50",
+          "price": "17.00",
+          "stock": 65
+        }
+      ]
+    },
+    {
+      "slug": "soy-candle-4oz",
+      "name": "Soy candle, 4 oz",
+      "maker": "Lopez Candleworks, Lopez Island",
+      "kind": "Home",
+      "weightKg": 0.28,
+      "dimsIn": [
+        2.8,
+        2.8,
+        3.2
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "LPC-004",
+          "flavour": "Douglas fir",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 75
+        },
+        {
+          "sku": "LPC-CDR-004",
+          "flavour": "Cedar smoke",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 60
+        },
+        {
+          "sku": "LPC-RN-004",
+          "flavour": "First rain",
+          "cost": "9.00",
+          "price": "20.00",
+          "stock": 55
+        }
+      ]
+    },
+    {
+      "slug": "soy-candle-8oz",
+      "name": "Soy candle, 8 oz",
+      "maker": "Lopez Candleworks, Lopez Island",
+      "kind": "Home",
+      "weightKg": 0.48,
+      "dimsIn": [
+        3.4,
+        3.4,
+        4.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 12,
+      "variants": [
+        {
+          "sku": "LPC-008",
+          "flavour": "Douglas fir",
+          "cost": "12.00",
+          "price": "27.00",
+          "stock": 55
+        },
+        {
+          "sku": "LPC-CDR-008",
+          "flavour": "Cedar smoke",
+          "cost": "12.00",
+          "price": "27.00",
+          "stock": 45
+        }
+      ]
+    },
+    {
+      "slug": "cedar-trivet",
+      "name": "Cedar trivet, hand-planed",
+      "maker": "Nooksack Woodshop, Bellingham",
+      "kind": "Home",
+      "weightKg": 0.3,
+      "dimsIn": [
+        7.0,
+        7.0,
+        0.8
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 12,
+      "variants": [
+        {
+          "sku": "NWS-TRIVET",
+          "flavour": "Hand-planed",
+          "cost": "8.50",
+          "price": "19.00",
+          "stock": 45
+        }
+      ]
+    }
+  ],
+  "_products_comment": "A tier is the EMPTY CARTON, and its PRICE is the carton alone: box, tissue, band and card, packed by hand. A box's total is that price plus the price of everything in it, so a box of candles costs more than a box of chocolate bars and margin no longer depends on what a customer picked. Its stock is cartons on the shelf (which is what inventory-ledger.csv has always recorded), its weightKg is the tare — carton, tissue, band and card with nothing in it — and its costPrice is packaging only, because the contents' cost now lives on the item lines. recipe[] is the curated default filling, expanded into real item lines at checkout; slots is how many items the box holds, curated or custom.",
+  "products": [
+    {
+      "name": "The Mistbox",
+      "slug": "the-mistbox",
+      "sku": "MB-SIG-01",
+      "price": "15.00",
+      "stock": 100,
+      "slots": 5,
+      "weightKg": 0.45,
+      "carton": {
+        "name": "Signature rigid",
+        "outsideIn": [
+          10.5,
+          8.5,
+          4.5
+        ]
+      },
+      "description": "Five pieces from five Pacific Northwest makers, laid in a forest-and-gold rigid box on pale sage tissue, banded and sealed by hand. Chosen to be opened slowly.",
+      "recipe": [
+        {
+          "sku": "FWT-050",
+          "quantity": 1
+        },
+        {
+          "sku": "BBC-SALT",
+          "quantity": 1
+        },
+        {
+          "sku": "OBC-004",
+          "quantity": 1
+        },
+        {
+          "sku": "CDC-TOWEL",
+          "quantity": 1
+        },
+        {
+          "sku": "LPC-004",
+          "quantity": 1
+        }
+      ],
+      "packagingCost": "6.80"
+    },
+    {
+      "name": "The Mistbox, Grand",
+      "slug": "the-mistbox-grand",
+      "sku": "MB-GRA-01",
+      "price": "17.00",
+      "stock": 100,
+      "slots": 8,
+      "weightKg": 0.62,
+      "carton": {
+        "name": "Grand rigid",
+        "outsideIn": [
+          12.5,
+          10.5,
+          5.5
+        ]
+      },
+      "description": "The larger box. Everything in the signature collection at full size, with an aged tomme, a second chocolate, and a cedar trivet — and a longer card, because there is more to say.",
+      "recipe": [
+        {
+          "sku": "FWT-100",
+          "quantity": 1
+        },
+        {
+          "sku": "BBC-SALT",
+          "quantity": 1
+        },
+        {
+          "sku": "BBC-MILK",
+          "quantity": 1
+        },
+        {
+          "sku": "OBC-004",
+          "quantity": 1
+        },
+        {
+          "sku": "SFC-TOMME",
+          "quantity": 1
+        },
+        {
+          "sku": "CDC-TOWEL",
+          "quantity": 1
+        },
+        {
+          "sku": "LPC-008",
+          "quantity": 1
+        },
+        {
+          "sku": "NWS-TRIVET",
+          "quantity": 1
+        }
+      ],
+      "packagingCost": "7.60"
+    }
+  ]
+}

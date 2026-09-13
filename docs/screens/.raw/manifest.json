@@ -1,0 +1,271 @@
+[
+  {
+    "name": "shop-1-boxes",
+    "flow": "shop",
+    "title": "Three boxes, one built in Saleor",
+    "note": "The Afternoon Box was composed in the dashboard — no code, no re-seed — and appeared here on its own.",
+    "marks": [
+      {
+        "text": "Built by Daniya in Saleor",
+        "x": 201,
+        "y": 191.359375,
+        "w": 378,
+        "h": 31.5
+      },
+      {
+        "text": "Contents come from the recipe, not the copy",
+        "x": 701,
+        "y": 808.359375,
+        "w": 378,
+        "h": 208.6875
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": -0.234375
+    }
+  },
+  {
+    "name": "build-1-curated",
+    "flow": "build",
+    "title": "The curated box is the starting state",
+    "note": "Nothing to configure. A customer who changes nothing gets exactly what the shop photographed.",
+    "marks": [
+      {
+        "text": "“Our selection” until something changes",
+        "x": 217,
+        "y": 599.65625,
+        "w": 340.3125,
+        "h": 28.5
+      },
+      {
+        "text": "One tap to change what is inside",
+        "x": 617.5625,
+        "y": 605.65625,
+        "w": 165.4375,
+        "h": 21.390625
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 120
+    }
+  },
+  {
+    "name": "build-2-editor",
+    "flow": "build",
+    "title": "Every slot is editable in place",
+    "note": "Change the item, or keep the item and change its flavour. Same gesture, two depths.",
+    "marks": [
+      {
+        "text": "The chosen flavour’s own photo",
+        "x": 217,
+        "y": 650.9375,
+        "w": 72,
+        "h": 72
+      },
+      {
+        "text": "Which item",
+        "x": 302.59375,
+        "y": 641.75,
+        "w": 480.40625,
+        "h": 42
+      },
+      {
+        "text": "Which flavour of it",
+        "x": 302.59375,
+        "y": 805.53125,
+        "w": 480.40625,
+        "h": 42
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 330
+    }
+  },
+  {
+    "name": "build-3-swapped",
+    "flow": "build",
+    "title": "Swapping updates the weight, live",
+    "note": "A tea became a candle, so the parcel got heavier. The number is summed from real per-variant weights.",
+    "marks": [
+      {
+        "text": "Count and real parcel weight",
+        "x": 217,
+        "y": 599.65625,
+        "w": 341.71875,
+        "h": 28.5
+      },
+      {
+        "text": "Back to our selection",
+        "x": 217,
+        "y": 1516.6875,
+        "w": 168.625,
+        "h": 21.390625
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 330
+    }
+  },
+  {
+    "name": "limits-1-cap",
+    "flow": "limits",
+    "title": "Caps are per product, across flavours",
+    "note": "Two chocolate bars is the limit, so the item greys out elsewhere — a box cannot become five bars.",
+    "marks": [
+      {
+        "text": "“(limit 2)” — cannot add a third bar",
+        "x": 302.59375,
+        "y": 987.921875,
+        "w": 480.40625,
+        "h": 42
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 330
+    }
+  },
+  {
+    "name": "receipt-1-locked",
+    "flow": "receipt",
+    "title": "Details stay behind the buyer’s email",
+    "note": "Status and tracking are open to anyone with the link; prices, address and gift message are not.",
+    "marks": [
+      {
+        "text": "A forwarded link cannot spoil the surprise",
+        "x": 45,
+        "y": 776.265625,
+        "w": 810,
+        "h": 186.46875
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 700
+    }
+  },
+  {
+    "name": "receipt-2-itemised",
+    "flow": "receipt",
+    "title": "The box is priced; its contents are named",
+    "note": "Items ride at zero, so they are listed rather than printed as “$0.00” beside a hand-made bar.",
+    "marks": [
+      {
+        "text": "The only priced line",
+        "x": 45,
+        "y": 840.546875,
+        "w": 810,
+        "h": 25.59375
+      },
+      {
+        "text": "Chosen flavours, unpriced",
+        "x": 45,
+        "y": 875.734375,
+        "w": 810,
+        "h": 25.59375
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 780.546875
+    }
+  },
+  {
+    "name": "email-1-confirmation",
+    "flow": "email",
+    "title": "The confirmation carries the same split",
+    "note": "Same rule as the receipt: one priced box, its contents named beneath it.",
+    "marks": [],
+    "origin": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "name": "pack-1-checklist",
+    "flow": "pack",
+    "title": "A packing checklist, not a run-on",
+    "note": "Carton first, then every item with its chosen flavour and SKU — readable while holding a box.",
+    "marks": [
+      {
+        "text": "The carton she reaches for",
+        "x": 45,
+        "y": 494.984375,
+        "w": 370,
+        "h": 29.09375
+      },
+      {
+        "text": "Flavour + SKU: the right jar, not just the right shelf",
+        "x": 45,
+        "y": 531.265625,
+        "w": 370,
+        "h": 22.5
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 430.90625
+    }
+  },
+  {
+    "name": "pack-2-label",
+    "flow": "pack",
+    "title": "Buying the shipping label",
+    "note": "One tap quotes a real carrier price; a second tap spends it. Nothing is bought without seeing the number.",
+    "marks": [
+      {
+        "text": "Quote first, buy second",
+        "x": 45,
+        "y": 610.3125,
+        "w": 370,
+        "h": 56
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 430.90625
+    }
+  },
+  {
+    "name": "dashboard-1-variants",
+    "flow": "dashboard",
+    "title": "A flavour is a variant, not a product",
+    "note": "Saleor’s own model — SKU and stock live on the variant. Adding a scent is adding a variant, which is why the product is the swap group.",
+    "marks": [
+      {
+        "text": "One photo per flavour, assigned to its variant",
+        "x": 285,
+        "y": 402.59375,
+        "w": 148,
+        "h": 148
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  {
+    "name": "dashboard-2-contents",
+    "flow": "dashboard",
+    "title": "Composing a box from items",
+    "note": "The Contents picker is how Daniya builds a box. What she picks becomes the order lines, the stock that moves, and the site copy.",
+    "marks": [
+      {
+        "text": "Pick items here — no code, no JSON, no re-seed",
+        "x": 285,
+        "y": 615.96875,
+        "w": 61.484375,
+        "h": 20
+      }
+    ],
+    "origin": {
+      "x": 0,
+      "y": 0
+    }
+  }
+]

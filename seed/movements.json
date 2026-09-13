@@ -1,0 +1,14 @@
+{
+  "_comment": "Supply-side stock movements. Sales are NOT recorded here — Saleor deducts those when an order completes. Types: receipt (+), sample (-), damage (-), writeoff (-), correction (+/-). Anything with planned:true is excluded from on-hand until you drop the flag.",
+  "movements": [
+    { "date": "2026-07-14", "sku": "MB-SIG-01", "type": "receipt",    "quantity": 6,   "note": "Stock-box pilot run, unbranded, for fit testing" },
+    { "date": "2026-07-14", "sku": "MB-GRA-01", "type": "receipt",    "quantity": 4,   "note": "Stock-box pilot run, unbranded, for fit testing" },
+    { "date": "2026-07-29", "sku": "MB-SIG-01", "type": "sample",     "quantity": -2,  "note": "Sent to photographer for the lookbook shoot" },
+    { "date": "2026-08-03", "sku": "MB-SIG-01", "type": "damage",     "quantity": -1,  "note": "Lid crushed in transit, not sellable" },
+    { "date": "2026-08-11", "sku": "MB-GRA-01", "type": "sample",     "quantity": -1,  "note": "Given to a maker for contents fit check" },
+    { "date": "2026-08-24", "sku": "MB-SIG-01", "type": "correction", "quantity": 1,   "note": "Miscount on the 14 Jul receipt, found during audit" },
+
+    { "date": "2026-11-05", "sku": "MB-SIG-01", "type": "receipt", "quantity": 100, "note": "Main run, printer delivery", "planned": true },
+    { "date": "2026-11-05", "sku": "MB-GRA-01", "type": "receipt", "quantity": 100, "note": "Main run, printer delivery", "planned": true }
+  ]
+}

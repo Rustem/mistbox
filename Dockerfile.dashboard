@@ -1,0 +1,9 @@
+# The Saleor dashboard, with one Mistbox augmentation: a small script that makes
+# a plugin-refused save show its real reason instead of a bare "Invalid value".
+# Mirrors Dockerfile.saleor — we already self-host the dashboard's nginx image,
+# so this only adds two files and changes nothing about how it is run.
+FROM ghcr.io/saleor/saleor-dashboard:3.23
+
+# The injected script, and an nginx config that appends it via sub_filter.
+COPY dashboard/mistbox-inline-errors.js /app/dashboard/mistbox-inline-errors.js
+COPY dashboard/default.conf /etc/nginx/conf.d/default.conf
