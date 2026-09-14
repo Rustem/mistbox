@@ -12,6 +12,8 @@ __pycache__/
 *.env.local
 *.secret.env
 storefront/.env.local
+# Resolved per-env files (e.g. from `op inject`). Templates (env/*.tpl) are safe.
+env/*.env
 
 # Noise
 *.log
