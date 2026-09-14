@@ -7,8 +7,13 @@ order form that hands payment to Stripe.
 
 ```
 mistbox/
-├── docker-compose.yml     Saleor 3.23, dashboard, Postgres, Valkey, worker, Mailpit
-├── saleor/                env files for the containers
+├── docker-compose.yml     Saleor 3.23 (+ rules plugin), custom dashboard, Postgres, Valkey, worker, Mailpit
+├── Dockerfile.saleor      Saleor image + saleor-plugin/  (enforces box rules at save time)
+├── Dockerfile.dashboard   dashboard image + dashboard/   (shows a refused save's real reason)
+├── saleor/                env files for the containers (dev placeholders only)
+├── saleor-plugin/         Django plugin — refuses a box that breaks Mistbox's rules
+├── dashboard/             injected script that surfaces the real refusal reason
+├── env/                   op run templates (op:// references only, no secrets)
 ├── seed/                  one-shot script that creates the channel, delivery and boxes
 ├── storefront/            Next.js 16 app — landing page, order form, Stripe handoff
 └── tools/                 validates every GraphQL document against Saleor's schema
@@ -30,11 +35,17 @@ mistbox/
 ```bash
 cd ~/code/mistbox
 
-docker compose pull                                        # ~2 GB, once
+docker compose build                                       # Saleor + dashboard custom images
+docker compose pull                                        # Postgres, Valkey, Mailpit (~2 GB, once)
 docker compose run --rm api python3 manage.py migrate       # builds the database
 docker compose run --rm api python3 manage.py createsuperuser
 docker compose up -d
 ```
+
+> **`api` and `dashboard` are built here, not pulled.** `api` bundles
+> `saleor-plugin/` (refuses rule-breaking boxes at save time) and `dashboard`
+> bundles the script in `dashboard/` (shows the real refusal reason). Rebuild
+> either with `docker compose build api` / `docker compose build dashboard`.
 
 Give it a minute on first boot, then:
 
@@ -104,6 +115,11 @@ Daniya can compose a box herself, without a developer or a re-seed:
 It appears on the storefront immediately, describes its own contents, and
 selling it draws down the real stock of everything inside.
 
+> **A box that breaks the rules can't be saved.** The `saleor-plugin/` Django
+> plugin refuses a box with more pieces than the carton holds, or too many of
+> one item, the moment it is saved — and the script in `dashboard/` replaces
+> Saleor's generic "Invalid value" with the real reason.
+
 > **Her picks always win.** A box's contents come from the Contents attribute
 > when it is set, and only fall back to the seeded `mistbox.recipe` metadata
 > when it is empty — so `seed.py` can be re-run without overwriting a box she
@@ -169,25 +185,46 @@ for, while the ledger counts only what has physically arrived. Add
 with the ledger balance. **`--apply` discards deductions from real orders**, so
 it is for development databases only.
 
-## 4. Give the storefront an app token
+## 4. Secrets (1Password)
 
-The storefront talks to Saleor as an app, not as you.
+The storefront's secrets — the Saleor app token, the Stripe/Resend/Shippo keys,
+the session-signing secrets — live in **1Password**, not in a file. There is no
+committed or hand-edited `.env.local`; `op run` injects the values at start time.
 
-1. Dashboard → **Configuration → Webhooks & Events → Create App**
-2. Name it `Mistbox storefront`
-3. Grant **Manage orders**, **Manage checkouts**, **Handle payments**, **Manage products**
-4. Create a token and copy it — it is shown once
+One-time setup:
+
+1. **Install the `op` CLI** and turn on 1Password → *Settings → Developer →
+   Integrate with 1Password CLI*. (On an Intel Mac where `brew install
+   1password-cli` fails, install the standalone binary from 1Password's download
+   cache into `/usr/local/bin`.)
+2. **Create the Saleor app token:** Dashboard → *Configuration → Webhooks &
+   Events → Create App*, name it `Mistbox storefront`, grant **Manage orders**,
+   **Manage checkouts**, **Handle payments**, **Manage products**, and copy the
+   token (shown once).
+3. **Create a `mistbox-dev` item** in the **Mistbox** 1Password vault with one
+   field per variable — the names are listed in `storefront/.env.example`. Put
+   the app token in `SALEOR_APP_TOKEN`; the Stripe keys come from step 6.
+
+`env/mistbox.env.tpl` (committed — references only, no values) maps each variable
+to `op://Mistbox/$MB_ENV/<NAME>`, so `MB_ENV` selects the environment
+(`mistbox-dev` / `mistbox-qa` / `mistbox-prod`). Fuller detail, including qa/prod,
+is in the engineering docs (Google Drive → **Mistbox → Website**: *Runbook* and
+*Secrets Inventory*).
 
 ## 5. Run the storefront
 
 ```bash
-cd ~/code/mistbox/storefront
-cp .env.example .env.local     # then fill in SALEOR_APP_TOKEN and the Stripe keys
+cd storefront
 npm install
-npm run dev
+MB_ENV=mistbox-dev op run --env-file=../env/mistbox.env.tpl -- npm run dev
 ```
 
 <http://localhost:3000>
+
+`op run` resolves the `op://` references and injects the secrets into the dev
+server; if `MB_ENV` is unset it fails rather than run without them. Need a plain
+file for a tool that expects one? `MB_ENV=mistbox-dev op inject -i
+env/mistbox.env.tpl -o storefront/.env.local` writes one (it stays gitignored).
 
 ## 6. Stripe
 
@@ -195,8 +232,8 @@ You said you still need to set Stripe up. In test mode:
 
 1. Create an account at <https://dashboard.stripe.com/register>, stay in **Test mode**
    (the toggle, top right).
-2. **Developers → API keys** → copy the *secret* key (`sk_test_…`) into
-   `STRIPE_SECRET_KEY` in `.env.local`.
+2. **Developers → API keys** → copy the *secret* key (`sk_test_…`) into the
+   `STRIPE_SECRET_KEY` field of the `mistbox-dev` item in 1Password.
 3. Install the CLI and forward webhooks to your machine:
 
 ```bash
@@ -205,8 +242,8 @@ stripe login
 stripe listen --forward-to localhost:3000/api/stripe/webhook
 ```
 
-   That prints a `whsec_…` secret — put it in `STRIPE_WEBHOOK_SECRET` and restart
-   `npm run dev`.
+   That prints a `whsec_…` secret — put it in the `STRIPE_WEBHOOK_SECRET` field
+   in 1Password and restart the dev server.
 
 4. Place a test order with card `4242 4242 4242 4242`, any future expiry, any CVC.
 
@@ -277,5 +314,6 @@ order page — that is what you write onto the 4×6 insert card by hand.
 * **Colourways are not modelled.** The packaging spec has six lid colourways; the
   catalogue currently has one variant per box. Add variant attributes when you decide
   which colourways actually go on sale.
-* **`SECRET_KEY` in `saleor/common.env` is a development placeholder.** Replace it
-  before this is reachable from the internet.
+* **`SECRET_KEY` in `saleor/common.env` is a development placeholder.** Fine for
+  local dev; qa and prod supply it (and the database URL) from 1Password via
+  `op run`, never from the committed file.
