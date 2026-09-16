@@ -1,0 +1,23 @@
+# Local development overlay — adds back the host ports the base file no
+# longer publishes, so `curl localhost:8000`, the dashboard at :9000, a local
+# `psql`/`redis-cli`, and Mailpit's web UI at :8025 all still work exactly as
+# before. qa and prod never include this file, so none of this is ever
+# reachable from outside the container network in those environments.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+services:
+  api:
+    ports: ["8000:8000"]
+
+  dashboard:
+    ports: ["9000:80"]
+
+  db:
+    ports: ["5432:5432"]
+
+  redis:
+    ports: ["6379:6379"]
+
+  mailpit:
+    ports: ["1025:1025", "8025:8025"]

@@ -1,0 +1,70 @@
+# qa overlay. Bring the stack up with secrets injected, nothing written to
+# disk:
+#
+#   MB_ENV=mistbox-qa op run --env-file=env/mistbox.env.tpl --env-file=env/saleor.env.tpl \
+#     -- docker compose -f docker-compose.yml -f docker-compose.qa.yml up -d --build
+#
+# The base file publishes no ports at all (see its own header comment) — the
+# only service below with a `ports:` entry is Caddy. Everything else is only
+# reachable over `saleor-backend-tier`, which Caddy and the storefront also
+# join here so they can resolve `api`/`dashboard` by service name.
+services:
+  api:
+    env_file: [saleor/qa.env]
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+
+  worker:
+    env_file: [saleor/qa.env]
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+
+  storefront:
+    build:
+      context: ./storefront
+      dockerfile: Dockerfile
+      # Baked in at build time — see storefront/Dockerfile's own comment on
+      # why these can't be supplied any later. A domain change means a
+      # rebuild, not just a restart.
+      args:
+        NEXT_PUBLIC_SALEOR_API_URL: ${NEXT_PUBLIC_SALEOR_API_URL}
+        NEXT_PUBLIC_SALEOR_CHANNEL: ${NEXT_PUBLIC_SALEOR_CHANNEL}
+        NEXT_PUBLIC_SALEOR_DASHBOARD_URL: ${NEXT_PUBLIC_SALEOR_DASHBOARD_URL}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+    restart: unless-stopped
+    networks: [saleor-backend-tier]
+    depends_on: [api]
+    environment:
+      # Server-side — read at request time, not baked into the image.
+      - NEXT_PUBLIC_SALEOR_API_URL=${NEXT_PUBLIC_SALEOR_API_URL}
+      - SALEOR_API_URL=${SALEOR_API_URL}
+      - SALEOR_APP_TOKEN=${SALEOR_APP_TOKEN}
+      - NEXT_PUBLIC_SALEOR_CHANNEL=${NEXT_PUBLIC_SALEOR_CHANNEL}
+      - NEXT_PUBLIC_SALEOR_DASHBOARD_URL=${NEXT_PUBLIC_SALEOR_DASHBOARD_URL}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - RESEND_FROM=${RESEND_FROM}
+      - RESEND_REPLY_TO=${RESEND_REPLY_TO}
+      - SHIPPO_API_TOKEN=${SHIPPO_API_TOKEN}
+      - SHIPPO_CARRIERS=${SHIPPO_CARRIERS}
+      - SHIPPO_WEBHOOK_TOKEN=${SHIPPO_WEBHOOK_TOKEN}
+      - SALEOR_WEBHOOK_SECRET=${SALEOR_WEBHOOK_SECRET}
+      - ORDER_REVEAL_SECRET=${ORDER_REVEAL_SECRET}
+      - ADMIN_SESSION_SECRET=${ADMIN_SESSION_SECRET}
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    networks: [saleor-backend-tier]
+    depends_on: [storefront, api, dashboard]
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  caddy-data:
+  caddy-config:

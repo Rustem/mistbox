@@ -1,0 +1,19 @@
+# Shared across every environment on this box — one Caddy instance, TLS
+# handled automatically (Let's Encrypt) per domain listed below. This is the
+# ONLY service in the qa/prod overlays that publishes a port; every rule in
+# this file is what the Hetzner Cloud Firewall's 80/443 rule actually protects.
+#
+# Service names (storefront/api/dashboard) resolve over the shared Docker
+# network — see docker-compose.qa.yml.
+
+qa.mist.box {
+	reverse_proxy storefront:3000
+}
+
+api.qa.mist.box {
+	reverse_proxy api:8000
+}
+
+admin.qa.mist.box {
+	reverse_proxy dashboard:80
+}

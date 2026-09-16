@@ -1,4 +1,12 @@
 # Mistbox — self-hosted Saleor stack, pinned to Saleor 3.23.
+#
+# This base file publishes NO ports at all. Compose *merges* a `ports:` list
+# across `-f` files rather than letting a later file remove entries, so the
+# only way for qa/prod to stay port-free is for the base file to never expose
+# anything in the first place — local convenience lives in
+# docker-compose.dev.yml instead, which adds the ports back for that overlay
+# only. Run dev with:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 services:
   api:
     # Saleor 3.23 plus `saleor-plugin/`, which adds the one rule the dashboard
@@ -7,7 +15,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.saleor
-    ports: ["8000:8000"]
     restart: unless-stopped
     networks: [saleor-backend-tier]
     depends_on:
@@ -24,14 +31,12 @@ services:
       context: .
       dockerfile: Dockerfile.dashboard
     image: mistbox-dashboard
-    ports: ["9000:80"]
     restart: unless-stopped
     environment:
       - API_URL=http://localhost:8000/graphql/
 
   db:
     image: library/postgres:15-alpine
-    ports: ["5432:5432"]
     restart: unless-stopped
     networks: [saleor-backend-tier]
     volumes:
@@ -49,14 +54,19 @@ services:
 
   redis:
     image: valkey/valkey:8.1-alpine
-    ports: ["6379:6379"]
     restart: unless-stopped
     networks: [saleor-backend-tier]
     volumes:
       - saleor-redis:/data
 
   worker:
-    image: ghcr.io/saleor/saleor:3.23
+    # Same custom image as `api` — not the stock Saleor image. The worker
+    # runs Django/Celery code from the same codebase `api` does, so it needs
+    # the same rules plugin installed; a stock image here was a pre-existing
+    # inconsistency, not something either service actually wants.
+    build:
+      context: .
+      dockerfile: Dockerfile.saleor
     command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
     restart: unless-stopped
     networks: [saleor-backend-tier]
@@ -67,7 +77,6 @@ services:
 
   mailpit:
     image: axllent/mailpit
-    ports: ["1025:1025", "8025:8025"]
     restart: unless-stopped
     networks: [saleor-backend-tier]
 

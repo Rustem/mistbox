@@ -1,0 +1,9 @@
+# Keeps Dockerfile.saleor / Dockerfile.dashboard's build context small — they
+# only need saleor-plugin/ and dashboard/. storefront/ has its own image and
+# its own .dockerignore.
+storefront/node_modules
+storefront/.next
+tools/node_modules
+docs
+.git
+.DS_Store

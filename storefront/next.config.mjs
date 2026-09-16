@@ -22,6 +22,12 @@ const saleorIsLocal = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/i.test(
 );
 
 const nextConfig = {
+  // Self-hosted (qa/prod) builds run from a container, where only this
+  // output — `.next/standalone` plus `.next/static` and `public/` — gets
+  // copied into the runtime image. `npm run dev` and a plain `npm run build`
+  // are unaffected; this only changes what `next build` additionally emits.
+  output: 'standalone',
+
   /**
    * Who may put this site in an iframe.
    *
