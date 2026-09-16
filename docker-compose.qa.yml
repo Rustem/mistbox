@@ -13,11 +13,13 @@ services:
     env_file: [saleor/qa.env]
     environment:
       - SECRET_KEY=${SECRET_KEY}
+      - RSA_PRIVATE_KEY=${RSA_PRIVATE_KEY}
 
   worker:
     env_file: [saleor/qa.env]
     environment:
       - SECRET_KEY=${SECRET_KEY}
+      - RSA_PRIVATE_KEY=${RSA_PRIVATE_KEY}
 
   storefront:
     build:

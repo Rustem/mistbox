@@ -16,3 +16,8 @@
 # at a real external database.
 
 SECRET_KEY=op://Mistbox/$MB_ENV/SECRET_KEY
+# Required whenever DEBUG=False — dev's DEBUG=True auto-generates a throwaway
+# one to a local file, which is exactly why this was invisible until the first
+# real qa boot. Without it Saleor raises ImproperlyConfigured and both `api`
+# and `worker` crash-loop. Generate with: openssl genrsa 2048
+RSA_PRIVATE_KEY=op://Mistbox/$MB_ENV/RSA_PRIVATE_KEY
