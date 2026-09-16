@@ -32,6 +32,12 @@ services:
       dockerfile: Dockerfile.dashboard
     image: mistbox-dashboard
     restart: unless-stopped
+    # Needed so Caddy (qa/prod) can reach this container by service name —
+    # without an explicit network it falls onto Compose's default network,
+    # invisible to anything on saleor-backend-tier. Worked in dev only because
+    # dev.yml publishes this port straight to the host, sidestepping Docker
+    # networking entirely.
+    networks: [saleor-backend-tier]
     environment:
       - API_URL=http://localhost:8000/graphql/
 

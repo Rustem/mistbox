@@ -21,6 +21,13 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - RSA_PRIVATE_KEY=${RSA_PRIVATE_KEY}
 
+  dashboard:
+    # The base file's API_URL (localhost:8000) is a dev-only assumption — it
+    # only works because the browser and the API happen to share a machine
+    # there. A real visitor's browser needs the real public API domain.
+    environment:
+      - API_URL=https://api.qa.mist.box/graphql/
+
   storefront:
     build:
       context: ./storefront
