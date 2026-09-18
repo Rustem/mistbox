@@ -1,5 +1,5 @@
 {
-  "_comment": "PLACEHOLDER ITEM DATA. Maker names, costs, weights and dimensions below are invented stand-ins so the item-level inventory and box-builder machinery can be built and tested. They must be replaced with the real Seattle Chocolate, Franz Chocolate and Smith Tea product lists (SKU, retail pack, wholesale cost, pack weight) before launch — naming a real business you do not have an agreement with implies a partnership you do not have. Every weight here is an ESTIMATE and has never been checked against a real pack on a scale; see items[].weightKg and products[].weightKg.",
+  "_comment": "PLACEHOLDER ITEM DATA. Maker names, costs, weights and dimensions below are invented stand-ins so the item-level inventory and box-builder machinery can be built and tested. They must be replaced with the real Seattle Chocolate, Franz Chocolate and Smith Tea product lists (SKU, retail pack, wholesale cost, pack weight) before launch \u2014 naming a real business you do not have an agreement with implies a partnership you do not have. Every weight here is an ESTIMATE and has never been checked against a real pack on a scale; see items[].weightKg and products[].weightKg.",
   "channel": {
     "name": "Mistbox US",
     "slug": "mistbox-us",
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "_items_comment": "An item is a PRODUCT; a flavour or scent is a VARIANT of it. That is Saleor's own model — SKU, stock and cost live on the variant — and it is what makes swapping native: choosing a different flavour is choosing a sibling variant, so the product IS the swap group and no extra grouping field is needed. Rule: same cost -> variant, different cost -> separate product. That is why the 4 oz and 8 oz candles are two products; if they were variants a customer could swap up a size and quietly move margin. weightKg, dimsIn and maxPerBox are product-wide; cost, price and stock are per variant. Items are published but visibleInListings=false — orderable, never shoppable on their own. PRICE is what the customer pays for that item inside a box; it was seeded at 2.25x cost (rounded to whole dollars), the markup implied by the old flat $88/$148 tiers, and is a plain editable number — change it here, not by changing the rule.",
+  "_items_comment": "An item is a PRODUCT; a flavour or scent is a VARIANT of it. That is Saleor's own model \u2014 SKU, stock and cost live on the variant \u2014 and it is what makes swapping native: choosing a different flavour is choosing a sibling variant, so the product IS the swap group and no extra grouping field is needed. Rule: same cost -> variant, different cost -> separate product. That is why the 4 oz and 8 oz candles are two products; if they were variants a customer could swap up a size and quietly move margin. weightKg, dimsIn and maxPerBox are product-wide; cost, price and stock are per variant. Items are published but visibleInListings=false \u2014 orderable, never shoppable on their own. PRICE is what the customer pays for that item inside a box; it was seeded at 2.25x cost (rounded to whole dollars), the markup implied by the old flat $88/$148 tiers, and is a plain editable number \u2014 change it here, not by changing the rule.",
   "items": [
     {
       "slug": "loose-tea-50g",
@@ -195,6 +195,13 @@
           "cost": "9.00",
           "price": "20.00",
           "stock": 40
+        },
+        {
+          "sku": "SFC-SMK",
+          "flavour": "Smoked tomme",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 25
         }
       ]
     },
@@ -315,11 +322,1832 @@
           "cost": "8.50",
           "price": "19.00",
           "stock": 45
+        },
+        {
+          "sku": "NWS-TRIVET-WAL",
+          "flavour": "Walnut-stained trivet",
+          "cost": "9.00",
+          "price": "20.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "tea-bags-box-20",
+      "name": "Tea bags, box of 20",
+      "maker": "Anacortes Tea Traders, Anacortes",
+      "kind": "Tea",
+      "weightKg": 0.09,
+      "dimsIn": [
+        4.2,
+        3.0,
+        1.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "ATT-BRK-20",
+          "flavour": "Ferry Line breakfast blend",
+          "cost": "4.20",
+          "price": "9.00",
+          "stock": 60
+        },
+        {
+          "sku": "ATT-CHM-20",
+          "flavour": "Chamomile dusk",
+          "cost": "3.90",
+          "price": "9.00",
+          "stock": 55
+        }
+      ]
+    },
+    {
+      "slug": "matcha-tin-30g",
+      "name": "Ceremonial matcha, 30 g tin",
+      "maker": "Index Peak Teahouse, Index",
+      "kind": "Tea",
+      "weightKg": 0.09,
+      "dimsIn": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 12,
+      "variants": [
+        {
+          "sku": "IPT-MCH-30",
+          "flavour": "Shade-grown ceremonial",
+          "cost": "14.00",
+          "price": "32.00",
+          "stock": 30
+        },
+        {
+          "sku": "IPT-MCH-CUL-30",
+          "flavour": "Culinary grade matcha",
+          "cost": "10.00",
+          "price": "22.00",
+          "stock": 25
+        }
+      ]
+    },
+    {
+      "slug": "herbal-tisane-pouch",
+      "name": "Herbal tisane, loose pouch",
+      "maker": "Anacortes Tea Traders, Anacortes",
+      "kind": "Tea",
+      "weightKg": 0.07,
+      "dimsIn": [
+        4.0,
+        3.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "ATT-HIB-P",
+          "flavour": "Hibiscus rose",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 45
+        },
+        {
+          "sku": "ATT-MNT-P",
+          "flavour": "Peppermint field",
+          "cost": "4.80",
+          "price": "11.00",
+          "stock": 50
+        }
+      ]
+    },
+    {
+      "slug": "chai-concentrate-8oz",
+      "name": "Chai concentrate, 8 oz bottle",
+      "maker": "Index Peak Teahouse, Index",
+      "kind": "Tea",
+      "weightKg": 0.28,
+      "dimsIn": [
+        2.2,
+        2.2,
+        6.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "IPT-CHAI-8",
+          "flavour": "Cardamom clove",
+          "cost": "6.50",
+          "price": "15.00",
+          "stock": 35
+        },
+        {
+          "sku": "IPT-CHAI-VAN-8",
+          "flavour": "Vanilla chai concentrate",
+          "cost": "6.20",
+          "price": "14.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "tea-sampler-4pk",
+      "name": "Tea sampler, set of 4",
+      "maker": "Anacortes Tea Traders, Anacortes",
+      "kind": "Tea",
+      "weightKg": 0.15,
+      "dimsIn": [
+        4.5,
+        4.5,
+        1.8
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 10,
+      "variants": [
+        {
+          "sku": "ATT-SMP-4",
+          "flavour": "Islands sampler",
+          "cost": "11.00",
+          "price": "25.00",
+          "stock": 25
+        },
+        {
+          "sku": "ATT-SMP-HOL-4",
+          "flavour": "Holiday sampler",
+          "cost": "11.00",
+          "price": "25.00",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "slug": "iced-tea-sachets-6pk",
+      "name": "Iced tea sachets, box of 6",
+      "maker": "Index Peak Teahouse, Index",
+      "kind": "Tea",
+      "weightKg": 0.1,
+      "dimsIn": [
+        4.0,
+        3.0,
+        1.2
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 18,
+      "variants": [
+        {
+          "sku": "IPT-ICE-6",
+          "flavour": "Blackberry sun tea",
+          "cost": "4.50",
+          "price": "10.00",
+          "stock": 40
+        },
+        {
+          "sku": "IPT-ICE-PCH-6",
+          "flavour": "Peach sun tea",
+          "cost": "4.50",
+          "price": "10.00",
+          "stock": 32
+        }
+      ]
+    },
+    {
+      "slug": "chocolate-bar-2oz",
+      "name": "Chocolate bar, 2 oz",
+      "maker": "Ballard & Bell, Seattle",
+      "kind": "Chocolate",
+      "weightKg": 0.06,
+      "dimsIn": [
+        4.5,
+        2.2,
+        0.35
+      ],
+      "maxPerBox": 3,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "BBC-MNT-2",
+          "flavour": "Mint dark",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 70
+        },
+        {
+          "sku": "BBC-ESP-2",
+          "flavour": "Espresso dark",
+          "cost": "3.80",
+          "price": "9.00",
+          "stock": 65
+        }
+      ]
+    },
+    {
+      "slug": "hot-cocoa-mix-8oz",
+      "name": "Drinking chocolate mix, 8 oz bag",
+      "maker": "Winthrop Cacao Works, Winthrop",
+      "kind": "Chocolate",
+      "weightKg": 0.24,
+      "dimsIn": [
+        4.0,
+        3.0,
+        2.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "WCW-COC-8",
+          "flavour": "Classic drinking chocolate",
+          "cost": "6.20",
+          "price": "14.00",
+          "stock": 40
+        },
+        {
+          "sku": "WCW-COC-MEX-8",
+          "flavour": "Mexican spice drinking chocolate",
+          "cost": "6.60",
+          "price": "15.00",
+          "stock": 30
+        }
+      ]
+    },
+    {
+      "slug": "chocolate-bark-5oz",
+      "name": "Chocolate bark, 5 oz box",
+      "maker": "Winthrop Cacao Works, Winthrop",
+      "kind": "Chocolate",
+      "weightKg": 0.14,
+      "dimsIn": [
+        5.0,
+        4.0,
+        0.6
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "WCW-BRK-5",
+          "flavour": "Sea salt almond bark",
+          "cost": "7.00",
+          "price": "16.00",
+          "stock": 45
+        },
+        {
+          "sku": "WCW-BRK-PEP-5",
+          "flavour": "Peppermint bark",
+          "cost": "7.00",
+          "price": "16.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "cocoa-nibs-4oz",
+      "name": "Roasted cocoa nibs, 4 oz pouch",
+      "maker": "Winthrop Cacao Works, Winthrop",
+      "kind": "Chocolate",
+      "weightKg": 0.11,
+      "dimsIn": [
+        3.5,
+        3.0,
+        1.2
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "WCW-NIB-4",
+          "flavour": "Single-origin nibs",
+          "cost": "5.40",
+          "price": "12.00",
+          "stock": 35
+        },
+        {
+          "sku": "WCW-NIB-CIN-4",
+          "flavour": "Cinnamon-dusted nibs",
+          "cost": "5.60",
+          "price": "13.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "truffle-box-6pc",
+      "name": "Chocolate truffles, box of 6",
+      "maker": "Ballard & Bell, Seattle",
+      "kind": "Chocolate",
+      "weightKg": 0.13,
+      "dimsIn": [
+        4.5,
+        4.5,
+        1.2
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 18,
+      "variants": [
+        {
+          "sku": "BBC-TRF-6",
+          "flavour": "Assorted truffles",
+          "cost": "9.50",
+          "price": "21.00",
+          "stock": 30
+        },
+        {
+          "sku": "BBC-TRF-DRK-6",
+          "flavour": "Dark chocolate truffles",
+          "cost": "9.80",
+          "price": "22.00",
+          "stock": 24
+        },
+        {
+          "sku": "BBC-TRF-SEA-6",
+          "flavour": "Sea salt caramel truffles",
+          "cost": "10.20",
+          "price": "23.00",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "slug": "chocolate-covered-cherries-4oz",
+      "name": "Chocolate-covered dried cherries, 4 oz",
+      "maker": "Ballard & Bell, Seattle",
+      "kind": "Chocolate",
+      "weightKg": 0.12,
+      "dimsIn": [
+        4.0,
+        3.0,
+        1.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "BBC-CHR-4",
+          "flavour": "Bing cherry, dark chocolate",
+          "cost": "6.80",
+          "price": "15.00",
+          "stock": 35
+        },
+        {
+          "sku": "BBC-CHR-MLK-4",
+          "flavour": "Bing cherry, milk chocolate",
+          "cost": "6.60",
+          "price": "15.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "toffee-bag-4oz",
+      "name": "Hazelnut toffee, 4 oz bag",
+      "maker": "Cle Elum Confections, Cle Elum",
+      "kind": "Confections",
+      "weightKg": 0.11,
+      "dimsIn": [
+        4.0,
+        3.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "CEC-TOF-4",
+          "flavour": "Classic hazelnut toffee",
+          "cost": "5.60",
+          "price": "13.00",
+          "stock": 45
+        },
+        {
+          "sku": "CEC-TOF-CHC-4",
+          "flavour": "Chocolate-dipped toffee",
+          "cost": "6.00",
+          "price": "14.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "caramels-box-8pc",
+      "name": "Salted caramels, box of 8",
+      "maker": "Cle Elum Confections, Cle Elum",
+      "kind": "Confections",
+      "weightKg": 0.16,
+      "dimsIn": [
+        4.5,
+        4.5,
+        1.3
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "CEC-CAR-8",
+          "flavour": "Fleur de sel caramels",
+          "cost": "8.20",
+          "price": "18.00",
+          "stock": 35
+        },
+        {
+          "sku": "CEC-CAR-CHC-8",
+          "flavour": "Chocolate-dipped caramels",
+          "cost": "8.60",
+          "price": "19.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "gummies-pouch-3oz",
+      "name": "Small-batch gummies, 3 oz pouch",
+      "maker": "Puyallup Sweet Shop, Puyallup",
+      "kind": "Confections",
+      "weightKg": 0.09,
+      "dimsIn": [
+        3.5,
+        3.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "PSS-GUM-3",
+          "flavour": "Marionberry gummies",
+          "cost": "4.40",
+          "price": "10.00",
+          "stock": 50
+        },
+        {
+          "sku": "PSS-GUM-RAS-3",
+          "flavour": "Raspberry gummies",
+          "cost": "4.40",
+          "price": "10.00",
+          "stock": 40
+        },
+        {
+          "sku": "PSS-GUM-SOUR-3",
+          "flavour": "Sour mix gummies",
+          "cost": "4.20",
+          "price": "9.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "caramel-corn-4oz",
+      "name": "Caramel corn, 4 oz bag",
+      "maker": "Puyallup Sweet Shop, Puyallup",
+      "kind": "Confections",
+      "weightKg": 0.11,
+      "dimsIn": [
+        5.0,
+        4.0,
+        2.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "PSS-CRN-4",
+          "flavour": "Buttered caramel corn",
+          "cost": "4.80",
+          "price": "11.00",
+          "stock": 40
+        },
+        {
+          "sku": "PSS-CRN-CHC-4",
+          "flavour": "Chocolate drizzle caramel corn",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 30
+        }
+      ]
+    },
+    {
+      "slug": "lollipops-3pk",
+      "name": "Hand-poured lollipops, set of 3",
+      "maker": "Puyallup Sweet Shop, Puyallup",
+      "kind": "Confections",
+      "weightKg": 0.08,
+      "dimsIn": [
+        4.0,
+        2.0,
+        0.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "PSS-LOL-3",
+          "flavour": "Orchard fruit lollipops",
+          "cost": "3.90",
+          "price": "9.00",
+          "stock": 45
+        },
+        {
+          "sku": "PSS-LOL-BRY-3",
+          "flavour": "Northwest berry lollipops",
+          "cost": "3.90",
+          "price": "9.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "coffee-bag-12oz",
+      "name": "Craft roast coffee, 12 oz bag",
+      "maker": "Fauntleroy Roasters, Seattle",
+      "kind": "Coffee",
+      "weightKg": 0.36,
+      "dimsIn": [
+        5.5,
+        3.0,
+        2.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "FLR-GUA-12",
+          "flavour": "Guatemala flagship roast",
+          "cost": "8.40",
+          "price": "19.00",
+          "stock": 40
+        },
+        {
+          "sku": "FLR-DRK-12",
+          "flavour": "Ferry dock dark roast",
+          "cost": "7.80",
+          "price": "18.00",
+          "stock": 45
+        }
+      ]
+    },
+    {
+      "slug": "coffee-bag-5oz",
+      "name": "Craft roast coffee, 5 oz travel bag",
+      "maker": "Fauntleroy Roasters, Seattle",
+      "kind": "Coffee",
+      "weightKg": 0.16,
+      "dimsIn": [
+        4.0,
+        2.5,
+        1.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "FLR-GUA-5",
+          "flavour": "Guatemala flagship roast",
+          "cost": "4.60",
+          "price": "10.00",
+          "stock": 50
+        },
+        {
+          "sku": "FLR-DRK-5",
+          "flavour": "Ferry dock dark roast, travel bag",
+          "cost": "4.30",
+          "price": "10.00",
+          "stock": 40
+        }
+      ]
+    },
+    {
+      "slug": "cold-brew-concentrate-8oz",
+      "name": "Cold brew concentrate, 8 oz bottle",
+      "maker": "Yakima Valley Roasters, Yakima",
+      "kind": "Coffee",
+      "weightKg": 0.28,
+      "dimsIn": [
+        2.2,
+        2.2,
+        6.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 18,
+      "variants": [
+        {
+          "sku": "YVR-CB-8",
+          "flavour": "Orchard valley cold brew",
+          "cost": "6.90",
+          "price": "16.00",
+          "stock": 30
+        },
+        {
+          "sku": "YVR-CB-MCH-8",
+          "flavour": "Mocha cold brew concentrate",
+          "cost": "7.20",
+          "price": "16.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "espresso-beans-8oz",
+      "name": "Whole bean espresso, 8 oz bag",
+      "maker": "Yakima Valley Roasters, Yakima",
+      "kind": "Coffee",
+      "weightKg": 0.24,
+      "dimsIn": [
+        4.5,
+        2.8,
+        1.8
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "YVR-ESP-8",
+          "flavour": "Valley espresso blend",
+          "cost": "6.20",
+          "price": "14.00",
+          "stock": 35
+        },
+        {
+          "sku": "YVR-ESP-DEC-8",
+          "flavour": "Decaf espresso blend",
+          "cost": "6.40",
+          "price": "14.00",
+          "stock": 26
+        }
+      ]
+    },
+    {
+      "slug": "flake-salt-tin-3oz",
+      "name": "Flake sea salt, 3 oz tin",
+      "maker": "Chelan Coast Pantry, Chelan",
+      "kind": "Pantry",
+      "weightKg": 0.09,
+      "dimsIn": [
+        2.5,
+        2.5,
+        1.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "CCP-SLT-3",
+          "flavour": "Coastal flake salt",
+          "cost": "5.00",
+          "price": "11.00",
+          "stock": 35
+        },
+        {
+          "sku": "CCP-SMK-3",
+          "flavour": "Smoked alderwood salt",
+          "cost": "5.40",
+          "price": "12.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "jam-jar-8oz",
+      "name": "Small-batch jam, 8 oz jar",
+      "maker": "Leavenworth Preserve Co., Leavenworth",
+      "kind": "Pantry",
+      "weightKg": 0.32,
+      "dimsIn": [
+        2.5,
+        2.5,
+        3.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "LPC-MBY-8",
+          "flavour": "Marionberry preserve",
+          "cost": "6.40",
+          "price": "14.00",
+          "stock": 40
+        },
+        {
+          "sku": "LPC-APR-8",
+          "flavour": "Apricot preserve",
+          "cost": "6.00",
+          "price": "14.00",
+          "stock": 35
+        }
+      ]
+    },
+    {
+      "slug": "honey-syrup-8oz",
+      "name": "Wildflower honey syrup, 8 oz bottle",
+      "maker": "Olympic Bee Company, Sequim",
+      "kind": "Pantry",
+      "weightKg": 0.34,
+      "dimsIn": [
+        2.5,
+        2.5,
+        5.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "OBC-SYR-8",
+          "flavour": "Wildflower syrup",
+          "cost": "7.20",
+          "price": "16.00",
+          "stock": 30
+        },
+        {
+          "sku": "OBC-SYR-BLK-8",
+          "flavour": "Blackberry blossom syrup",
+          "cost": "7.60",
+          "price": "17.00",
+          "stock": 22
+        }
+      ]
+    },
+    {
+      "slug": "hot-sauce-5oz",
+      "name": "Small-batch hot sauce, 5 oz bottle",
+      "maker": "Ellensburg Ferment Co., Ellensburg",
+      "kind": "Pantry",
+      "weightKg": 0.18,
+      "dimsIn": [
+        2.0,
+        2.0,
+        5.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "EFC-HOT-5",
+          "flavour": "Smoked chili hot sauce",
+          "cost": "4.80",
+          "price": "11.00",
+          "stock": 40
+        },
+        {
+          "sku": "EFC-HOT-HAB-5",
+          "flavour": "Habanero mango hot sauce",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 30
+        }
+      ]
+    },
+    {
+      "slug": "drink-syrup-8oz",
+      "name": "Craft drink syrup, 8 oz bottle",
+      "maker": "Ellensburg Ferment Co., Ellensburg",
+      "kind": "Pantry",
+      "weightKg": 0.3,
+      "dimsIn": [
+        2.5,
+        2.5,
+        6.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "EFC-SYR-8",
+          "flavour": "Huckleberry tonic syrup",
+          "cost": "6.80",
+          "price": "15.00",
+          "stock": 28
+        },
+        {
+          "sku": "EFC-SYR-GNG-8",
+          "flavour": "Ginger switchel syrup",
+          "cost": "6.40",
+          "price": "14.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "fruit-butter-6oz",
+      "name": "Fruit butter, 6 oz jar",
+      "maker": "Leavenworth Preserve Co., Leavenworth",
+      "kind": "Pantry",
+      "weightKg": 0.24,
+      "dimsIn": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "LPC-FTB-6",
+          "flavour": "Spiced apple butter",
+          "cost": "5.60",
+          "price": "13.00",
+          "stock": 30
+        },
+        {
+          "sku": "LPC-FTB-PMK-6",
+          "flavour": "Pumpkin butter",
+          "cost": "5.80",
+          "price": "13.00",
+          "stock": 22
+        }
+      ]
+    },
+    {
+      "slug": "bar-soap-4oz",
+      "name": "Bar soap, 4 oz",
+      "maker": "Poulsbo Soap Works, Poulsbo",
+      "kind": "Soap",
+      "weightKg": 0.11,
+      "dimsIn": [
+        3.0,
+        2.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "PSW-LAV-4",
+          "flavour": "Lavender cedar",
+          "cost": "4.00",
+          "price": "9.00",
+          "stock": 55
+        },
+        {
+          "sku": "PSW-CIT-4",
+          "flavour": "Citrus fir",
+          "cost": "4.00",
+          "price": "9.00",
+          "stock": 50
+        }
+      ]
+    },
+    {
+      "slug": "travel-soap-2oz",
+      "name": "Travel bar soap, 2 oz",
+      "maker": "Poulsbo Soap Works, Poulsbo",
+      "kind": "Soap",
+      "weightKg": 0.06,
+      "dimsIn": [
+        2.2,
+        1.5,
+        0.8
+      ],
+      "maxPerBox": 3,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "PSW-LAV-2",
+          "flavour": "Lavender cedar, travel size",
+          "cost": "2.20",
+          "price": "5.00",
+          "stock": 60
+        },
+        {
+          "sku": "PSW-CIT-2",
+          "flavour": "Citrus fir, travel size",
+          "cost": "2.20",
+          "price": "5.00",
+          "stock": 48
+        }
+      ]
+    },
+    {
+      "slug": "liquid-castile-8oz",
+      "name": "Liquid castile soap, 8 oz bottle",
+      "maker": "Bainbridge Botanicals, Bainbridge Island",
+      "kind": "Soap",
+      "weightKg": 0.28,
+      "dimsIn": [
+        2.5,
+        2.5,
+        6.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "BBT-CAS-8",
+          "flavour": "Unscented castile",
+          "cost": "6.00",
+          "price": "14.00",
+          "stock": 30
+        },
+        {
+          "sku": "BBT-CAS-LAV-8",
+          "flavour": "Lavender castile",
+          "cost": "6.20",
+          "price": "14.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "shampoo-bar-3oz",
+      "name": "Shampoo bar, 3 oz",
+      "maker": "Bainbridge Botanicals, Bainbridge Island",
+      "kind": "Soap",
+      "weightKg": 0.09,
+      "dimsIn": [
+        2.5,
+        2.5,
+        1.2
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "BBT-SHM-3",
+          "flavour": "Rosemary mint shampoo bar",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 35
+        },
+        {
+          "sku": "BBT-SHM-CDR-3",
+          "flavour": "Cedarwood shampoo bar",
+          "cost": "5.40",
+          "price": "12.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "bath-salts-6oz",
+      "name": "Bath salts, 6 oz jar",
+      "maker": "Poulsbo Soap Works, Poulsbo",
+      "kind": "Soap",
+      "weightKg": 0.18,
+      "dimsIn": [
+        2.5,
+        2.5,
+        3.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 22,
+      "variants": [
+        {
+          "sku": "PSW-BTH-6",
+          "flavour": "Douglas fir bath salts",
+          "cost": "5.60",
+          "price": "13.00",
+          "stock": 30
+        },
+        {
+          "sku": "PSW-BTH-LAV-6",
+          "flavour": "Lavender bath salts",
+          "cost": "5.60",
+          "price": "13.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "lotion-bar-2oz",
+      "name": "Solid lotion bar, 2 oz tin",
+      "maker": "Bainbridge Botanicals, Bainbridge Island",
+      "kind": "Soap",
+      "weightKg": 0.06,
+      "dimsIn": [
+        2.2,
+        2.2,
+        0.8
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 28,
+      "variants": [
+        {
+          "sku": "BBT-LTN-2",
+          "flavour": "Shea cedar lotion bar",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 40
+        },
+        {
+          "sku": "BBT-LTN-LAV-2",
+          "flavour": "Shea lavender lotion bar",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 32
+        }
+      ]
+    },
+    {
+      "slug": "lip-balm-tube",
+      "name": "Lip balm, tube",
+      "maker": "Snoqualmie Bee Balm, Snoqualmie",
+      "kind": "Skincare",
+      "weightKg": 0.015,
+      "dimsIn": [
+        0.5,
+        0.5,
+        3.0
+      ],
+      "maxPerBox": 4,
+      "lowStockAt": 40,
+      "variants": [
+        {
+          "sku": "SBB-LIP-1",
+          "flavour": "Beeswax honey balm",
+          "cost": "1.80",
+          "price": "4.00",
+          "stock": 80
+        },
+        {
+          "sku": "SBB-LIP-MNT-1",
+          "flavour": "Beeswax mint balm",
+          "cost": "1.80",
+          "price": "4.00",
+          "stock": 65
+        }
+      ]
+    },
+    {
+      "slug": "body-oil-2oz",
+      "name": "Body oil, 2 oz bottle",
+      "maker": "Snoqualmie Bee Balm, Snoqualmie",
+      "kind": "Skincare",
+      "weightKg": 0.07,
+      "dimsIn": [
+        1.5,
+        1.5,
+        4.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "SBB-OIL-2",
+          "flavour": "Calendula body oil",
+          "cost": "5.40",
+          "price": "12.00",
+          "stock": 32
+        },
+        {
+          "sku": "SBB-OIL-LAV-2",
+          "flavour": "Lavender body oil",
+          "cost": "5.40",
+          "price": "12.00",
+          "stock": 26
+        }
+      ]
+    },
+    {
+      "slug": "facial-toner-4oz",
+      "name": "Rosewater facial toner, 4 oz",
+      "maker": "Georgetown Apothecary, Seattle",
+      "kind": "Skincare",
+      "weightKg": 0.14,
+      "dimsIn": [
+        2.0,
+        2.0,
+        5.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "GTA-TNR-4",
+          "flavour": "Rosewater toner",
+          "cost": "6.20",
+          "price": "14.00",
+          "stock": 25
+        },
+        {
+          "sku": "GTA-TNR-WCH-4",
+          "flavour": "Witch hazel toner",
+          "cost": "5.80",
+          "price": "13.00",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "slug": "hand-salve-2oz",
+      "name": "Hand salve, 2 oz tin",
+      "maker": "Georgetown Apothecary, Seattle",
+      "kind": "Skincare",
+      "weightKg": 0.06,
+      "dimsIn": [
+        2.2,
+        2.2,
+        0.9
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "GTA-SLV-2",
+          "flavour": "Cedar hand salve",
+          "cost": "4.20",
+          "price": "9.00",
+          "stock": 35
+        },
+        {
+          "sku": "GTA-SLV-LAV-2",
+          "flavour": "Lavender hand salve",
+          "cost": "4.20",
+          "price": "9.00",
+          "stock": 28
+        }
+      ]
+    },
+    {
+      "slug": "herbal-tincture-1oz",
+      "name": "Herbal tincture, 1 oz bottle",
+      "maker": "Georgetown Apothecary, Seattle",
+      "kind": "Apothecary",
+      "weightKg": 0.05,
+      "dimsIn": [
+        1.2,
+        1.2,
+        3.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "GTA-TIN-1",
+          "flavour": "Calming chamomile tincture",
+          "cost": "7.00",
+          "price": "16.00",
+          "stock": 18
+        },
+        {
+          "sku": "GTA-TIN-ELD-1",
+          "flavour": "Elderberry immune tincture",
+          "cost": "7.40",
+          "price": "17.00",
+          "stock": 15
+        }
+      ]
+    },
+    {
+      "slug": "botanical-candle-4oz",
+      "name": "Botanical soy candle, 4 oz",
+      "maker": "Georgetown Apothecary, Seattle",
+      "kind": "Apothecary",
+      "weightKg": 0.16,
+      "dimsIn": [
+        2.5,
+        2.5,
+        2.8
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "GTA-CDL-4",
+          "flavour": "Sage & smoke candle",
+          "cost": "6.40",
+          "price": "14.00",
+          "stock": 25
+        },
+        {
+          "sku": "GTA-CDL-LAV-4",
+          "flavour": "Lavender fields candle",
+          "cost": "6.40",
+          "price": "14.00",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "slug": "vashon-soy-candle-8oz",
+      "name": "Soy candle, 8 oz",
+      "maker": "Vashon Wick & Wax, Vashon Island",
+      "kind": "Candles",
+      "weightKg": 0.28,
+      "dimsIn": [
+        3.2,
+        3.2,
+        3.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "VWW-FIR-8",
+          "flavour": "Douglas fir",
+          "cost": "6.60",
+          "price": "15.00",
+          "stock": 45
+        },
+        {
+          "sku": "VWW-RN-8",
+          "flavour": "First rain",
+          "cost": "6.60",
+          "price": "15.00",
+          "stock": 40
+        }
+      ]
+    },
+    {
+      "slug": "travel-candle-2oz",
+      "name": "Travel tin candle, 2 oz",
+      "maker": "Vashon Wick & Wax, Vashon Island",
+      "kind": "Candles",
+      "weightKg": 0.08,
+      "dimsIn": [
+        2.2,
+        2.2,
+        1.0
+      ],
+      "maxPerBox": 3,
+      "lowStockAt": 35,
+      "variants": [
+        {
+          "sku": "VWW-FIR-2",
+          "flavour": "Douglas fir, travel tin",
+          "cost": "2.80",
+          "price": "6.00",
+          "stock": 55
+        },
+        {
+          "sku": "VWW-RN-2",
+          "flavour": "First rain, travel tin",
+          "cost": "2.80",
+          "price": "6.00",
+          "stock": 45
+        }
+      ]
+    },
+    {
+      "slug": "wax-melts-3oz",
+      "name": "Wax melts, 3 oz box",
+      "maker": "Orcas Candle Co., Orcas Island",
+      "kind": "Candles",
+      "weightKg": 0.09,
+      "dimsIn": [
+        3.0,
+        3.0,
+        1.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "OCC-MLT-3",
+          "flavour": "Cabin fever wax melts",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 40
+        },
+        {
+          "sku": "OCC-MLT-FIR-3",
+          "flavour": "Douglas fir wax melts",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 32
+        }
+      ]
+    },
+    {
+      "slug": "linen-spray-4oz",
+      "name": "Linen spray, 4 oz bottle",
+      "maker": "Orcas Candle Co., Orcas Island",
+      "kind": "Candles",
+      "weightKg": 0.13,
+      "dimsIn": [
+        1.8,
+        1.8,
+        5.5
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "OCC-LIN-4",
+          "flavour": "Lavender linen spray",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 30
+        },
+        {
+          "sku": "OCC-LIN-CDR-4",
+          "flavour": "Cedar rain linen spray",
+          "cost": "5.20",
+          "price": "12.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "taper-candles-2pk",
+      "name": "Hand-dipped taper candles, pair",
+      "maker": "Orcas Candle Co., Orcas Island",
+      "kind": "Candles",
+      "weightKg": 0.1,
+      "dimsIn": [
+        1.0,
+        1.0,
+        8.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "OCC-TPR-2",
+          "flavour": "Beeswax tapers",
+          "cost": "4.60",
+          "price": "10.00",
+          "stock": 30
+        },
+        {
+          "sku": "OCC-TPR-IVY-2",
+          "flavour": "Ivory dinner tapers",
+          "cost": "4.20",
+          "price": "9.00",
+          "stock": 24
+        }
+      ]
+    },
+    {
+      "slug": "diffuser-3oz",
+      "name": "Reed diffuser, 3 oz",
+      "maker": "Vashon Wick & Wax, Vashon Island",
+      "kind": "Candles",
+      "weightKg": 0.16,
+      "dimsIn": [
+        2.5,
+        2.5,
+        5.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "VWW-DIF-3",
+          "flavour": "Cedar rain diffuser",
+          "cost": "7.20",
+          "price": "16.00",
+          "stock": 22
+        },
+        {
+          "sku": "VWW-DIF-FIR-3",
+          "flavour": "Douglas fir diffuser",
+          "cost": "7.20",
+          "price": "16.00",
+          "stock": 18
+        }
+      ]
+    },
+    {
+      "slug": "ceramic-mug-12oz",
+      "name": "Handmade ceramic mug, 12 oz",
+      "maker": "Chuckanut Ceramics, Bellingham",
+      "kind": "Ceramics",
+      "weightKg": 0.34,
+      "dimsIn": [
+        4.0,
+        3.2,
+        3.8
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "CHC-MUG-12",
+          "flavour": "Speckled stoneware mug",
+          "cost": "12.00",
+          "price": "27.00",
+          "stock": 20
+        },
+        {
+          "sku": "CHC-MUG-SAGE-12",
+          "flavour": "Sage glaze mug",
+          "cost": "12.00",
+          "price": "27.00",
+          "stock": 16
+        }
+      ]
+    },
+    {
+      "slug": "ceramic-dish-small",
+      "name": "Small ceramic dish",
+      "maker": "Chuckanut Ceramics, Bellingham",
+      "kind": "Ceramics",
+      "weightKg": 0.2,
+      "dimsIn": [
+        4.5,
+        4.5,
+        1.2
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 18,
+      "variants": [
+        {
+          "sku": "CHC-DSH-S",
+          "flavour": "Ring dish, sage glaze",
+          "cost": "9.00",
+          "price": "20.00",
+          "stock": 18
+        },
+        {
+          "sku": "CHC-DSH-BLU-S",
+          "flavour": "Ring dish, tide-pool blue glaze",
+          "cost": "9.00",
+          "price": "20.00",
+          "stock": 14
+        }
+      ]
+    },
+    {
+      "slug": "ceramic-tumbler-8oz",
+      "name": "Ceramic tumbler, 8 oz",
+      "maker": "Saltwater Studio Pottery, Port Townsend",
+      "kind": "Ceramics",
+      "weightKg": 0.26,
+      "dimsIn": [
+        3.5,
+        3.5,
+        3.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 16,
+      "variants": [
+        {
+          "sku": "SSP-TUM-8",
+          "flavour": "Salt-fired tumbler",
+          "cost": "10.00",
+          "price": "22.00",
+          "stock": 18
+        },
+        {
+          "sku": "SSP-TUM-DRF-8",
+          "flavour": "Driftwood glaze tumbler",
+          "cost": "10.00",
+          "price": "22.00",
+          "stock": 14
+        }
+      ]
+    },
+    {
+      "slug": "ceramic-candle-holder",
+      "name": "Ceramic candle holder",
+      "maker": "Saltwater Studio Pottery, Port Townsend",
+      "kind": "Ceramics",
+      "weightKg": 0.22,
+      "dimsIn": [
+        3.0,
+        3.0,
+        2.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "SSP-HLD-1",
+          "flavour": "Driftwood glaze holder",
+          "cost": "8.40",
+          "price": "19.00",
+          "stock": 16
+        },
+        {
+          "sku": "SSP-HLD-SLT-1",
+          "flavour": "Salt-fired candle holder",
+          "cost": "8.40",
+          "price": "19.00",
+          "stock": 13
+        }
+      ]
+    },
+    {
+      "slug": "waxed-canvas-pouch",
+      "name": "Waxed canvas pouch",
+      "maker": "Fremont Canvas Goods, Seattle",
+      "kind": "Bags",
+      "weightKg": 0.12,
+      "dimsIn": [
+        6.0,
+        4.0,
+        1.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 18,
+      "variants": [
+        {
+          "sku": "FCG-POU-1",
+          "flavour": "Waxed canvas zip pouch",
+          "cost": "8.80",
+          "price": "20.00",
+          "stock": 22
+        },
+        {
+          "sku": "FCG-POU-NVY-1",
+          "flavour": "Waxed canvas zip pouch, navy",
+          "cost": "8.80",
+          "price": "20.00",
+          "stock": 18
+        }
+      ]
+    },
+    {
+      "slug": "leather-wallet",
+      "name": "Leather card wallet",
+      "maker": "Fremont Canvas Goods, Seattle",
+      "kind": "Bags",
+      "weightKg": 0.07,
+      "dimsIn": [
+        4.0,
+        3.0,
+        0.5
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 16,
+      "variants": [
+        {
+          "sku": "FCG-WAL-1",
+          "flavour": "Slim leather card wallet",
+          "cost": "11.00",
+          "price": "25.00",
+          "stock": 18
+        },
+        {
+          "sku": "FCG-WAL-BLK-1",
+          "flavour": "Slim leather card wallet, black",
+          "cost": "11.00",
+          "price": "25.00",
+          "stock": 14
+        }
+      ]
+    },
+    {
+      "slug": "tool-roll",
+      "name": "Small canvas tool roll",
+      "maker": "Wallingford Workshop, Seattle",
+      "kind": "Bags",
+      "weightKg": 0.18,
+      "dimsIn": [
+        7.0,
+        4.0,
+        1.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 14,
+      "variants": [
+        {
+          "sku": "WLW-ROL-1",
+          "flavour": "Waxed canvas tool roll",
+          "cost": "10.40",
+          "price": "23.00",
+          "stock": 15
+        },
+        {
+          "sku": "WLW-ROL-OLV-1",
+          "flavour": "Waxed canvas tool roll, olive",
+          "cost": "10.40",
+          "price": "23.00",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "slug": "canvas-tote-folded",
+      "name": "Waxed canvas tote, folded",
+      "maker": "Wallingford Workshop, Seattle",
+      "kind": "Bags",
+      "weightKg": 0.42,
+      "dimsIn": [
+        9.0,
+        7.0,
+        2.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 12,
+      "variants": [
+        {
+          "sku": "WLW-TOT-1",
+          "flavour": "Ferry commuter tote",
+          "cost": "16.00",
+          "price": "36.00",
+          "stock": 14
+        },
+        {
+          "sku": "WLW-TOT-NVY-1",
+          "flavour": "Ferry commuter tote, navy stripe",
+          "cost": "16.00",
+          "price": "36.00",
+          "stock": 11
+        }
+      ]
+    },
+    {
+      "slug": "knit-throw-blanket",
+      "name": "Recycled-cotton knit throw",
+      "maker": "Cedar & Cloth, Tacoma",
+      "kind": "Textiles",
+      "weightKg": 1.1,
+      "dimsIn": [
+        10.0,
+        8.0,
+        3.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 10,
+      "variants": [
+        {
+          "sku": "CDC-THR-1",
+          "flavour": "Forest-green knit throw",
+          "cost": "24.00",
+          "price": "54.00",
+          "stock": 12
+        },
+        {
+          "sku": "CDC-THR-FOG-1",
+          "flavour": "Fog-grey knit throw",
+          "cost": "24.00",
+          "price": "54.00",
+          "stock": 10
+        }
+      ]
+    },
+    {
+      "slug": "wool-scarf",
+      "name": "Wool scarf",
+      "maker": "Cedar & Cloth, Tacoma",
+      "kind": "Textiles",
+      "weightKg": 0.18,
+      "dimsIn": [
+        8.0,
+        6.0,
+        1.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "CDC-SCF-1",
+          "flavour": "Fog-grey wool scarf",
+          "cost": "13.00",
+          "price": "29.00",
+          "stock": 18
+        },
+        {
+          "sku": "CDC-SCF-RST-1",
+          "flavour": "Rust wool scarf",
+          "cost": "13.00",
+          "price": "29.00",
+          "stock": 14
+        }
+      ]
+    },
+    {
+      "slug": "wool-socks-pair",
+      "name": "Wool socks, pair",
+      "maker": "Cedar & Cloth, Tacoma",
+      "kind": "Textiles",
+      "weightKg": 0.09,
+      "dimsIn": [
+        5.0,
+        4.0,
+        1.0
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 30,
+      "variants": [
+        {
+          "sku": "CDC-SOX-1",
+          "flavour": "Cascade wool socks",
+          "cost": "4.80",
+          "price": "11.00",
+          "stock": 40
+        },
+        {
+          "sku": "CDC-SOX-CHR-1",
+          "flavour": "Charcoal wool socks",
+          "cost": "4.80",
+          "price": "11.00",
+          "stock": 32
+        }
+      ]
+    },
+    {
+      "slug": "hand-dyed-napkins-4pk",
+      "name": "Hand-dyed napkins, set of 4",
+      "maker": "Cedar & Cloth, Tacoma",
+      "kind": "Textiles",
+      "weightKg": 0.22,
+      "dimsIn": [
+        8.0,
+        8.0,
+        1.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 15,
+      "variants": [
+        {
+          "sku": "CDC-NAP-4",
+          "flavour": "Indigo-dyed linen napkins",
+          "cost": "14.00",
+          "price": "32.00",
+          "stock": 15
+        },
+        {
+          "sku": "CDC-NAP-OCH-4",
+          "flavour": "Ochre-dyed linen napkins",
+          "cost": "14.00",
+          "price": "32.00",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "slug": "letterpress-card-single",
+      "name": "Letterpress greeting card",
+      "maker": "Fauntleroy Press, Seattle",
+      "kind": "Cards",
+      "weightKg": 0.02,
+      "dimsIn": [
+        5.0,
+        7.0,
+        0.2
+      ],
+      "maxPerBox": 3,
+      "lowStockAt": 40,
+      "variants": [
+        {
+          "sku": "FLP-CRD-1",
+          "flavour": "Gold-foil pine card",
+          "cost": "3.20",
+          "price": "7.00",
+          "stock": 60
+        },
+        {
+          "sku": "FLP-CRD-MTN-1",
+          "flavour": "Gold-foil mountain card",
+          "cost": "3.20",
+          "price": "7.00",
+          "stock": 48
+        }
+      ]
+    },
+    {
+      "slug": "notecard-set-6",
+      "name": "Notecard set, box of 6",
+      "maker": "Fauntleroy Press, Seattle",
+      "kind": "Cards",
+      "weightKg": 0.12,
+      "dimsIn": [
+        5.5,
+        7.5,
+        1.0
+      ],
+      "maxPerBox": 1,
+      "lowStockAt": 20,
+      "variants": [
+        {
+          "sku": "FLP-SET-6",
+          "flavour": "PNW landmark notecards",
+          "cost": "9.60",
+          "price": "22.00",
+          "stock": 25
+        },
+        {
+          "sku": "FLP-SET-BOT-6",
+          "flavour": "Botanical notecards",
+          "cost": "9.60",
+          "price": "22.00",
+          "stock": 20
+        }
+      ]
+    },
+    {
+      "slug": "gift-wrap-sheet",
+      "name": "Letterpress gift wrap, single sheet",
+      "maker": "Fauntleroy Press, Seattle",
+      "kind": "Cards",
+      "weightKg": 0.03,
+      "dimsIn": [
+        12.0,
+        18.0,
+        0.1
+      ],
+      "maxPerBox": 2,
+      "lowStockAt": 25,
+      "variants": [
+        {
+          "sku": "FLP-WRP-1",
+          "flavour": "Forest-print gift wrap",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 30
+        },
+        {
+          "sku": "FLP-WRP-TIDE-1",
+          "flavour": "Tide-pool print gift wrap",
+          "cost": "3.60",
+          "price": "8.00",
+          "stock": 24
         }
       ]
     }
   ],
-  "_products_comment": "A tier is the EMPTY CARTON, and its PRICE is the carton alone: box, tissue, band and card, packed by hand. A box's total is that price plus the price of everything in it, so a box of candles costs more than a box of chocolate bars and margin no longer depends on what a customer picked. Its stock is cartons on the shelf (which is what inventory-ledger.csv has always recorded), its weightKg is the tare — carton, tissue, band and card with nothing in it — and its costPrice is packaging only, because the contents' cost now lives on the item lines. recipe[] is the curated default filling, expanded into real item lines at checkout; slots is how many items the box holds, curated or custom.",
+  "_products_comment": "A tier is the EMPTY CARTON, and its PRICE is the carton alone: box, tissue, band and card, packed by hand. A box's total is that price plus the price of everything in it, so a box of candles costs more than a box of chocolate bars and margin no longer depends on what a customer picked. Its stock is cartons on the shelf (which is what inventory-ledger.csv has always recorded), its weightKg is the tare \u2014 carton, tissue, band and card with nothing in it \u2014 and its costPrice is packaging only, because the contents' cost now lives on the item lines. recipe[] is the curated default filling, expanded into real item lines at checkout; slots is how many items the box holds, curated or custom.",
   "products": [
     {
       "name": "The Mistbox",
@@ -378,7 +2206,7 @@
           5.5
         ]
       },
-      "description": "The larger box. Everything in the signature collection at full size, with an aged tomme, a second chocolate, and a cedar trivet — and a longer card, because there is more to say.",
+      "description": "The larger box. Everything in the signature collection at full size, with an aged tomme, a second chocolate, and a cedar trivet \u2014 and a longer card, because there is more to say.",
       "recipe": [
         {
           "sku": "FWT-100",
