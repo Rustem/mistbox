@@ -1263,8 +1263,10 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        code = main()
     except requests.exceptions.ConnectionError:
         sys.exit("Could not reach Saleor. Is `docker compose up` running?")
     except (RuntimeError, SystemExit) as exc:
         sys.exit(str(exc))
+    else:
+        sys.exit(code)
