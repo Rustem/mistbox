@@ -11,6 +11,18 @@ qa.mist.box {
 }
 
 api.qa.mist.box {
+	# Saleor's own DEBUG=False build never serves /media/ itself — Django only
+	# does that in DEBUG mode, on the assumption a CDN/S3 sits in front of it
+	# in production. We have neither yet, so Caddy serves the shared
+	# saleor-media volume directly, bypassing Django for this path only.
+	# Without this, `Product.thumbnail`/`ProductMedia.url` 404 the instant a
+	# Thumbnail DB row exists for that (media, size, format), even though the
+	# file is sitting right there on disk — a real, launch-blocking gap found
+	# while wiring up the QA fixture catalogue's photos.
+	handle_path /media/* {
+		root * /srv/media
+		file_server
+	}
 	reverse_proxy api:8000
 }
 

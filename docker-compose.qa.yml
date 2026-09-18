@@ -73,6 +73,12 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
+      # Read-only: Saleor writes here, Caddy only serves it. Saleor's own
+      # DEBUG=False build does NOT serve /media/ itself (that's meant for a
+      # CDN/S3 in front of it) — without this, any already-thumbnailed image
+      # 404s the moment its Thumbnail DB row exists, even though the file is
+      # sitting right there on disk. See the Caddyfile's own comment.
+      - saleor-media:/srv/media:ro
 
 volumes:
   caddy-data:
