@@ -4,6 +4,10 @@ Self-hosted Saleor 3.23 + Next.js 16 storefront. Full engineering docs (architec
 environments, runbooks) live in the Mistbox Drive folder — start there for anything
 beyond what's below. This file is for the sharp, easy-to-repeat mistakes.
 
+For a live incident ("a customer says X didn't happen"), use the
+[Oncall Playbook](https://claude.ai/artifact/9XGrGMtEqsjZuEuuEmAmnR) (source:
+`docs/oncall-guide.html`) instead — it's organized by symptom, not by mistake.
+
 ## Deploying to a new environment (qa, and eventually prod)
 
 Two steps, in this order, the first time any environment goes live:
