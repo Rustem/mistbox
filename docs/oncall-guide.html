@@ -1,14 +1,13 @@
 <title>Oncall Playbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f3ede1; --surface:#fbf8f1; --surface-2:#efe7d6; --sunk:#e9e0cd;
+    --bg:#f3ede1; --surface:#fbf8f1; --sunk:#e9e0cd;
     --ink:#24322a; --muted:#7c6f57; --line:#e1d7c2; --line-strong:#d3c6ab;
-    --forest:#2f4a3f; --forest-bg:#e4ebe6; --gold:#a8791b; --gold-soft:#c9a24a; --gold-bg:#f3e9cf;
+    --gold:#a8791b; --gold-bg:#f3e9cf;
     --danger:#a23b2d; --danger-bg:#f4e2dd;
-    --warn:#93691f; --warn-bg:#f1e7cd;
     --ok:#3f6b4e; --ok-bg:#e1ece3;
     --shadow:0 10px 28px rgba(36,50,42,.10);
     --mono:'JetBrains Mono',ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -18,21 +17,19 @@
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#1a231d; --surface:#232f28; --surface-2:#2b382f; --sunk:#1f2a23;
+      --bg:#1a231d; --surface:#232f28; --sunk:#1f2a23;
       --ink:#eee6d4; --muted:#a89c82; --line:#354339; --line-strong:#43533f;
-      --forest:#84b299; --forest-bg:#20302a; --gold:#d8b25a; --gold-soft:#b98f36; --gold-bg:#332c1c;
+      --gold:#d8b25a; --gold-bg:#332c1c;
       --danger:#dd7a66; --danger-bg:#33231f;
-      --warn:#e0bd66; --warn-bg:#332a18;
       --ok:#8fc4a2; --ok-bg:#1e2b23;
       --shadow:0 10px 28px rgba(0,0,0,.35);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#1a231d; --surface:#232f28; --surface-2:#2b382f; --sunk:#1f2a23;
+    --bg:#1a231d; --surface:#232f28; --sunk:#1f2a23;
     --ink:#eee6d4; --muted:#a89c82; --line:#354339; --line-strong:#43533f;
-    --forest:#84b299; --forest-bg:#20302a; --gold:#d8b25a; --gold-soft:#b98f36; --gold-bg:#332c1c;
+    --gold:#d8b25a; --gold-bg:#332c1c;
     --danger:#dd7a66; --danger-bg:#33231f;
-    --warn:#e0bd66; --warn-bg:#332a18;
     --ok:#8fc4a2; --ok-bg:#1e2b23;
     --shadow:0 10px 28px rgba(0,0,0,.35);
   }
@@ -40,541 +37,113 @@
   *{box-sizing:border-box}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;
     -webkit-font-smoothing:antialiased;}
-  .page{max-width:900px;margin:0 auto;padding:0 20px 90px;}
+  .page{max-width:680px;margin:0 auto;padding:36px 20px 60px;}
 
-  .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);
-    padding-block:14px 12px;border-bottom:1px solid var(--line);
-    display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
-  .topbar__row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .eyebrow{font-family:var(--label);text-transform:uppercase;letter-spacing:.18em;
     font-size:10.5px;font-weight:600;color:var(--gold);margin:0;}
-  .topbar h1{font-family:var(--display);font-weight:700;font-size:1.5rem;margin:2px 0 0;
+  h1{font-family:var(--display);font-weight:700;font-size:1.7rem;margin:4px 0 14px;
     letter-spacing:-.01em;}
-  .toggle{font-family:var(--label);font-size:11px;cursor:pointer;background:var(--surface);
-    color:var(--ink);border:1px solid var(--line-strong);border-radius:999px;padding:4px 11px;}
-  .toggle:hover{border-color:var(--gold);}
-  .toc{display:flex;flex-wrap:wrap;gap:6px 8px;}
-  .toc a{font-family:var(--label);font-size:11px;color:var(--muted);text-decoration:none;
-    padding:3px 9px;border-radius:999px;border:1px solid var(--line-strong);}
-  .toc a:hover{color:var(--gold);border-color:var(--gold);}
-
-  .lede{color:var(--muted);font-size:.95rem;margin:14px 0 20px;max-width:66ch;}
+  .lede{color:var(--muted);font-size:.95rem;margin:0 0 30px;max-width:60ch;}
   .lede b{color:var(--ink);}
+
+  h2{font-family:var(--display);font-weight:600;font-size:1.25rem;margin:36px 0 10px;}
+  h2 .n{color:var(--gold);margin-right:8px;}
+  p{font-size:.92rem;color:var(--muted);margin:0 0 12px;max-width:62ch;}
+  p b, li b{color:var(--ink);}
   code.inline{font-family:var(--mono);font-size:.86em;background:var(--sunk);padding:1px 6px;
     border-radius:5px;color:var(--ink);}
 
-  /* Architecture strip */
-  .arch{background:var(--forest-bg);border:1px solid var(--line);border-radius:14px;
-    padding:20px 22px;margin-bottom:28px;box-shadow:var(--shadow);}
-  .arch h2{font-family:var(--display);font-size:1.2rem;margin:0 0 10px;font-weight:700;}
-  .arch-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--label);
-    font-size:.82rem;margin-bottom:12px;}
-  .arch-flow .node{background:var(--surface);border:1px solid var(--line-strong);border-radius:8px;
-    padding:6px 12px;font-weight:600;color:var(--ink);}
-  .arch-flow .arrow{color:var(--gold);font-weight:600;}
-  .arch p{font-size:.87rem;color:var(--muted);margin:0;max-width:70ch;}
-  .arch p b{color:var(--ink);}
-
-  section.block{margin-bottom:34px;scroll-margin-top:110px;}
-  .block__head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
-  .block__num{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--gold);}
-  .block h2{font-family:var(--display);font-weight:600;font-size:1.45rem;margin:0;}
-  .block__intro{color:var(--muted);font-size:.9rem;margin:4px 0 16px;max-width:70ch;}
-  .block__intro b{color:var(--ink);}
-
-  /* Universal triage steps */
-  .steps{display:flex;flex-direction:column;gap:10px;}
-  .step{display:flex;gap:14px;background:var(--surface);border:1px solid var(--line);
-    border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);}
-  .step__n{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--gold);
-    flex-shrink:0;width:26px;}
-  .step__body p{margin:0 0 6px;font-size:.88rem;color:var(--muted);}
-  .step__body p:last-child{margin-bottom:0}
-  .step__body b{color:var(--ink);}
-
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
-    padding:16px 18px 18px;margin-bottom:14px;box-shadow:var(--shadow);}
-  .card h3{font-family:var(--label);font-weight:600;font-size:.88rem;
-    color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  .card p{font-size:.87rem;color:var(--muted);margin:0 0 10px;}
-  .card p:last-child{margin-bottom:0}
-  .card p b{color:var(--ink);}
-  .card ul{margin:0 0 10px;padding-left:20px;font-size:.87rem;color:var(--muted);}
-  .card ul:last-child{margin-bottom:0}
-  .card li{margin-bottom:4px;}
-  .card li b{color:var(--ink);}
-
-  .pill{display:inline-block;font-family:var(--label);font-size:10px;font-weight:600;
-    text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:999px;
-    border:1px solid var(--line-strong);color:var(--muted);}
-  .pill.danger{background:var(--danger-bg);color:var(--danger);border-color:var(--danger);}
-  .pill.warn{background:var(--warn-bg);color:var(--warn);border-color:var(--warn);}
-  .pill.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);}
-
   .codebox{position:relative;background:var(--sunk);border:1px solid var(--line);border-radius:10px;
-    margin:8px 0;overflow:hidden;}
+    margin:10px 0 16px;overflow:hidden;}
   .codebox pre{margin:0;padding:12px 44px 12px 15px;overflow-x:auto;font-family:var(--mono);
-    font-size:.78rem;line-height:1.6;color:var(--ink);}
+    font-size:.8rem;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word;}
   .codebox .copy{position:absolute;top:7px;right:7px;font-family:var(--label);font-size:10px;
     font-weight:600;letter-spacing:.03em;background:var(--surface);color:var(--muted);
     border:1px solid var(--line-strong);border-radius:6px;padding:3px 7px;cursor:pointer;}
   .codebox .copy:hover{border-color:var(--gold);color:var(--gold);}
   .codebox .copy.copied{background:var(--ok-bg);color:var(--ok);border-color:var(--ok);}
 
-  /* Log reference table */
-  table.logref{width:100%;border-collapse:collapse;font-size:.82rem;}
-  table.logref th,table.logref td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);
-    vertical-align:top;}
-  table.logref th{font-family:var(--label);text-transform:uppercase;letter-spacing:.04em;
-    font-size:.66rem;color:var(--muted);}
-  table.logref td.line{font-family:var(--mono);font-size:.74rem;color:var(--ink);white-space:nowrap;}
-  table.logref td.meaning{color:var(--muted);}
-  table.logref td.meaning b{color:var(--ink);}
-  table.logref tr:last-child td{border-bottom:none;}
-  .twrap{overflow-x:auto;}
+  .example{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .example .line{font-family:var(--mono);font-size:.78rem;background:var(--sunk);
+    border-radius:6px;padding:8px 10px;margin-bottom:8px;overflow-x:auto;white-space:pre-wrap;
+    word-break:break-word;}
+  .example .meaning{font-size:.87rem;color:var(--muted);margin:0;}
+  .example .meaning b{color:var(--ink);}
+  .tag{display:inline-block;font-family:var(--label);font-size:10px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:999px;
+    margin-bottom:8px;}
+  .tag.ok{background:var(--ok-bg);color:var(--ok);}
+  .tag.bad{background:var(--danger-bg);color:var(--danger);}
 
-  /* Symptom index chips */
-  .symptom-index{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
-  .symptom-index a{font-family:var(--label);font-size:.8rem;color:var(--ink);text-decoration:none;
-    background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;
-    padding:8px 13px;box-shadow:var(--shadow);}
-  .symptom-index a:hover{border-color:var(--gold);color:var(--gold);}
-
-  .esc{background:var(--danger-bg);border-radius:10px;padding:12px 14px;font-size:.85rem;
-    color:var(--danger);margin-top:10px;}
-  .esc b{font-family:var(--label);}
-  .note{background:var(--surface-2);border-radius:10px;padding:9px 12px;font-size:.82rem;
-    color:var(--muted);margin-top:8px;}
-  .note b{color:var(--ink);}
-
-  footer{border-top:1px solid var(--line);padding-top:20px;margin-top:20px;color:var(--muted);
-    font-family:var(--label);font-size:.78rem;display:flex;justify-content:space-between;
-    flex-wrap:wrap;gap:10px;}
-
-  @media (max-width:520px){
-    .arch-flow{font-size:.74rem}
-  }
+  footer{border-top:1px solid var(--line);padding-top:16px;margin-top:36px;color:var(--muted);
+    font-family:var(--label);font-size:.78rem;}
 </style>
 
 <div class="page">
-  <div class="topbar">
-    <div class="topbar__row">
-      <div>
-        <p class="eyebrow">Mistbox · Oncall</p>
-        <h1>Oncall Playbook</h1>
-      </div>
-      <button class="toggle" id="themeBtn" type="button">◐ theme</button>
-    </div>
-    <div class="toc">
-      <a href="#start-here">Start here</a>
-      <a href="#logref">Log reference</a>
-      <a href="#symptoms">Symptoms</a>
-      <a href="#rootcauses">Root causes</a>
-      <a href="#escalate">Escalate</a>
-    </div>
+  <p class="eyebrow">Mistbox · Oncall</p>
+  <h1>Oncall Playbook</h1>
+  <p class="lede">How to read the logs when a customer says something didn't happen
+    (an email, a status update) — and what a normal line looks like versus a broken one.</p>
+
+  <h2><span class="n">1</span>Connect and read the logs</h2>
+  <p>SSH in with <code class="inline">vmssh</code>, then filter the storefront logs down to
+    just this app's own lines — everything real is tagged <code class="inline">[mistbox]</code>.</p>
+  <div class="codebox">
+    <pre><code>vmssh deploy 'cd ~/code/mistbox && docker compose -f docker-compose.yml -f docker-compose.qa.yml logs storefront --since 24h | grep "mistbox\]"'</code></pre>
+    <button class="copy" type="button">Copy</button>
   </div>
 
-  <p class="lede">For a report shaped like <b>"a customer says X didn't happen"</b> or
-    <b>"the site/dashboard is behaving wrong."</b> This is triage, not infrastructure —
-    for restarting services, reading resource usage, or SSH access, see the separate
-    <b>QA Operations</b> reference. Every command and log line below is real, pulled
-    from this codebase — not generic advice.</p>
+  <h2><span class="n">2</span>What to look for</h2>
+  <p>Every line names what happened in plain words. A normal line says something was
+    <b>sent</b> or <b>created</b>. A broken one is shouting in <b>CAPS</b> and says what
+    <b>FAILED</b> or was <b>NOT SENT</b> or <b>rejected</b> — and the reason is usually right
+    there in the same line, no further digging needed.</p>
 
-  <div class="arch">
-    <h2>The shape of every incident here</h2>
-    <div class="arch-flow">
-      <span class="node">Saleor / Stripe / Shippo event</span>
-      <span class="arrow">→</span>
-      <span class="node">one webhook route</span>
-      <span class="arrow">→</span>
-      <span class="node">several independent side effects</span>
-    </div>
-    <p>Every customer-facing effect — an order confirmation, a shipped notice, a delivery
-      alert — is triggered by an external event landing on one of three routes
-      (<code class="inline">stripe/webhook</code>, <code class="inline">saleor/webhook</code>,
-      <code class="inline">shippo/webhook</code>), each of which fans out to a handful of
-      <b>independent, failure-isolated</b> side effects: a metadata write, an external API
-      call, an email send. One failing never silently blocks the others, and — this is
-      the important part — <b>every one of them logs its own outcome</b>, with a specific
-      reason, not a generic error. That's what makes this class of bug fast to diagnose:
-      you are almost never guessing, you're reading.</p>
+  <h2><span class="n">3</span>Two real examples</h2>
+
+  <div class="example">
+    <span class="tag bad">broken</span>
+    <div class="line">[mistbox] saleor webhook rejected: bad or missing secret</div>
+    <p class="meaning">Saleor tried to tell us a box shipped, and we refused to listen. This is
+      what caused the missed shipped-email — the secret we check against didn't match what's in
+      1Password. <b>Fix:</b> delete and recreate the webhook with the current secret.</p>
   </div>
 
-  <!-- START HERE -->
-  <section class="block" id="start-here">
-    <div class="block__head"><span class="block__num">01</span><h2>Start here, every time</h2></div>
-    <p class="block__intro">Before jumping to a specific symptom below, run these three in order.
-      Most reports resolve at step 2.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step__n">1</div>
-        <div class="step__body">
-          <p><b>Name the event that should have fired.</b> "Customer didn't get an email" isn't
-            specific enough — which email? A confirmation comes from a Stripe checkout session
-            completing; a shipped notice from a Saleor fulfillment tracking number; a delivered
-            notice from a Shippo carrier status. Each is a different route, different log lines,
-            different failure modes. If you can't name which one, ask what the admin actually did
-            (or check the order's own history — step 3) before searching logs blind.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step__n">2</div>
-        <div class="step__body">
-          <p><b>Grep the storefront logs for <code class="inline">mistbox\]</code>.</b> This tag
-            marks every line this app itself writes — filtering to it removes all Next.js/Docker
-            noise and leaves only the lines that explain what happened.</p>
-          <div class="codebox">
-            <pre><code>vmssh deploy 'cd ~/code/mistbox && docker compose -f docker-compose.yml -f docker-compose.qa.yml logs storefront --since 24h | grep "mistbox\]"'</code></pre>
-            <button class="copy" type="button">Copy</button>
-          </div>
-          <p>Read the <a href="#logref">log reference table</a> below — most lines name the exact
-            cause in the message itself.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step__n">3</div>
-        <div class="step__body">
-          <p><b>Check the order's own state against Saleor's.</b> <code class="inline">mistbox_stage</code>
-            and <code class="inline">mistbox_history</code> in order metadata are this app's record
-            of how far processing actually got — compare against what Saleor's native fields show
-            (a fulfillment exists, a tracking number is set). A mismatch — Saleor looks done, our
-            stage is one step behind — tells you precisely which side effect never completed.</p>
-          <div class="codebox">
-            <pre><code>{ orders(first: 1, channel: "mistbox-us", filter: { search: "&lt;order number&gt;" }) {
-  edges { node { number userEmail metadata { key value }
-    fulfillments { trackingNumber status } } } }
-}</code></pre>
-            <button class="copy" type="button">Copy</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="example">
+    <span class="tag ok">not actually broken</span>
+    <div class="line">[mistbox] SHIPPO REGISTRATION FAILED for order 1 (933...): not a valid test tracking number</div>
+    <p class="meaning">Looks alarming (all caps, "FAILED") but on qa this is expected — the
+      Shippo API key here is test-mode and only accepts Shippo's own sample tracking numbers, not
+      real ones. Nothing to fix.</p>
+  </div>
 
-  <!-- LOG REFERENCE -->
-  <section class="block" id="logref">
-    <div class="block__head"><span class="block__num">02</span><h2>Log line reference</h2></div>
-    <p class="block__intro">Every <code class="inline">[mistbox]</code> line this codebase can emit
-      around an order, grouped by the route that writes it. Search this table for a fragment of
-      what you saw in the logs.</p>
+  <div class="example">
+    <span class="tag ok">normal</span>
+    <div class="line">[mistbox] shipped email for order 1 sent (01a0c216-e77e-75ac-8327-bc0cc2099bd1)</div>
+    <p class="meaning">Success. The id at the end is Resend's own message id — paste it into
+      Resend's dashboard to see delivery status for that exact email.</p>
+  </div>
 
-    <div class="card">
-      <h3>stripe/webhook — checkout → order created → confirmation email</h3>
-      <div class="twrap">
-        <table class="logref">
-          <tr><th>Log fragment</th><th>Meaning</th></tr>
-          <tr><td class="line">order N created from Stripe session ...</td>
-              <td class="meaning">Normal. The order exists in Saleor now.</td></tr>
-          <tr><td class="line">confirmation for order N sent to ... (id)</td>
-              <td class="meaning">Normal — success. The <code class="inline">(id)</code> is the Resend message id, useful for looking it up in Resend's own dashboard.</td></tr>
-          <tr><td class="line"><b>CONFIRMATION NOT SENT</b> for order N to ...</td>
-              <td class="meaning">Order was created fine; the email itself failed (Resend outage, bad API key, address rejected). <b>The order is real and paid for</b> — this is purely a notification miss.</td></tr>
-          <tr><td class="line">order N has no address, skipping confirmation</td>
-              <td class="meaning">Expected for a checkout with no shipping address collected — not a bug by itself.</td></tr>
-          <tr><td class="line"><b>PAID BUT NOT ORDERED</b> — session ...</td>
-              <td class="meaning">Worst case: Stripe has the customer's money and Saleor has no order. Escalate immediately — see <a href="#escalate">Escalate</a>.</td></tr>
-          <tr><td class="line">webhook signature check failed</td>
-              <td class="meaning"><code class="inline">STRIPE_WEBHOOK_SECRET</code> mismatch between Stripe's dashboard and this environment's 1Password value — same class of bug as the Saleor webhook secret issue below.</td></tr>
-          <tr><td class="line">checkout already completed / payment already recorded — skipping</td>
-              <td class="meaning">Normal. Stripe redelivers events; these guards are why a customer never gets charged or emailed twice.</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>saleor/webhook — tracking added → stage advance, Shippo registration, shipped email</h3>
-      <div class="twrap">
-        <table class="logref">
-          <tr><th>Log fragment</th><th>Meaning</th></tr>
-          <tr><td class="line"><b>saleor webhook rejected: bad or missing secret</b></td>
-              <td class="meaning">The exact bug from Sept 2026. Saleor sent the event; this route's shared-secret check failed. See <a href="#rootcauses">webhook secret drift</a> below.</td></tr>
-          <tr><td class="line">saleor webhook: order not found</td>
-              <td class="meaning">The event referenced an order id this environment doesn't have — almost always a webhook still pointed at the wrong environment (dev event hitting qa, or vice versa).</td></tr>
-          <tr><td class="line"><b>SHIPPO REGISTRATION FAILED</b> for order N (...)</td>
-              <td class="meaning">Stage still advances and the email still sends regardless — this is deliberately non-blocking. On qa specifically, check whether the tracking number is one of Shippo's real sandbox test numbers; a real-looking number in test mode always fails this exact way and is <b>not a bug</b>.</td></tr>
-          <tr><td class="line">shipped email for order N sent (id)</td>
-              <td class="meaning">Normal — success.</td></tr>
-          <tr><td class="line"><b>SHIPPED EMAIL NOT SENT</b> for order N</td>
-              <td class="meaning">Stage and tracking are correct in Saleor; only the notification failed. Safe to fix the cause and manually replay (see the symptom card below).</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>shippo/webhook — carrier status change → delivered email / delivery problem</h3>
-      <div class="twrap">
-        <table class="logref">
-          <tr><th>Log fragment</th><th>Meaning</th></tr>
-          <tr><td class="line">shippo webhook rejected: bad or missing token</td>
-              <td class="meaning">Same class as the Saleor secret issue, different shared value (<code class="inline">SHIPPO_WEBHOOK_TOKEN</code>, passed as a query param at registration, not a header).</td></tr>
-          <tr><td class="line">shippo webhook without order metadata or status</td>
-              <td class="meaning">A tracking event arrived for a number Shippo knows about but this app can't map back to an order — check the number was registered correctly in the first place.</td></tr>
-          <tr><td class="line">DELIVERY PROBLEM on order N: status</td>
-              <td class="meaning">Not a bug — a real carrier exception (returned, damaged, address issue) being surfaced. Worth a human look at the actual order.</td></tr>
-          <tr><td class="line">delivered email for order N sent (id)</td>
-              <td class="meaning">Normal — success.</td></tr>
-          <tr><td class="line"><b>DELIVERED EMAIL NOT SENT</b> for order N</td>
-              <td class="meaning">Same shape as the shipped-email miss — carrier state is correct, only the notification failed.</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Admin-facing (label purchase, login, newsletter, customer sync)</h3>
-      <div class="twrap">
-        <table class="logref">
-          <tr><th>Log fragment</th><th>Meaning</th></tr>
-          <tr><td class="line">label email for order N sent (id)</td>
-              <td class="meaning">This is the <b>admin's own</b> label-purchase confirmation — a different email from the customer's "shipped" notice. Don't confuse the two when triaging "no email" reports.</td></tr>
-          <tr><td class="line"><b>LABEL BOUGHT BUT ORDER N NOT FULFILLED</b></td>
-              <td class="meaning">Money was spent on a real shipping label with Shippo, but Saleor's fulfillment record wasn't created. The label/tracking number in the log line is real — go create the fulfillment by hand rather than buying a second label.</td></tr>
-          <tr><td class="line">customer sync failed for ... : ... MANAGE_USERS</td>
-              <td class="meaning">The app token lacks a permission it needs for this one, non-critical step (creating a Saleor customer record for marketing/history). The order itself is unaffected — cosmetic unless someone's specifically relying on customer records existing.</td></tr>
-          <tr><td class="line">admin login / forgot / reset: Saleor unreachable</td>
-              <td class="meaning">The <code class="inline">api</code> service is down or unreachable from the storefront container — check <code class="inline">docker compose ps</code> and the Docker-networking root cause below before assuming it's a code bug.</td></tr>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- SYMPTOM INDEX -->
-  <section class="block" id="symptoms">
-    <div class="block__head"><span class="block__num">03</span><h2>By symptom</h2></div>
-    <p class="block__intro">Deeper walkthroughs for the reports that come up in practice.</p>
-    <div class="symptom-index">
-      <a href="#sym-no-email">Customer says they got no email</a>
-      <a href="#sym-duplicate">Customer got the same email twice</a>
-      <a href="#sym-stuck">Order looks stuck / tracking not updating</a>
-      <a href="#sym-images">Images broken on the storefront</a>
-      <a href="#sym-502">Site or dashboard unreachable (502)</a>
-      <a href="#sym-paid-no-order">Customer was charged, no order exists</a>
-    </div>
-
-    <div class="card" id="sym-no-email">
-      <h3>Customer says they got no email <span class="pill warn">most common</span></h3>
-      <p><b>First, name which email.</b> Confirmation (checkout), shipped (tracking added),
-        delivered (carrier confirms delivery), or the admin's own label-purchase receipt — each
-        is a different route (see the <a href="#logref">log reference</a>) and the fix differs.</p>
-      <ul>
-        <li>Grep for that order's number in the storefront logs. A <b>"... NOT SENT"</b> line
-          names the real reason — usually Resend being unreachable, or a webhook rejected
-          upstream so the send never happened at all.</li>
-        <li>If nothing at all was logged for that order around the expected time, the triggering
-          webhook likely never arrived — check it's registered and active (<a href="#rootcauses">webhook secret drift</a> is the most common cause on this project so far).</li>
-        <li>Check the order's <code class="inline">mistbox_stage</code>. If it's one step behind
-          what the dashboard shows, the webhook fired but a side effect (including the email)
-          didn't complete — see step 3 of <a href="#start-here">Start here</a>.</li>
-      </ul>
-      <p><b>Fix:</b> once the root cause (usually a stale secret) is corrected, replay the missed
-        event by hand rather than asking the admin to redo the original action:</p>
-      <div class="codebox">
-        <pre><code>curl -X POST "https://api.qa.mist.box/api/saleor/webhook" \
-  -H "Content-Type: application/json" \
-  -H "X-Mistbox-Webhook-Secret: $(op read op://Mistbox/mistbox-qa/SALEOR_WEBHOOK_SECRET)" \
-  -d '{"fulfillment":{"id":"<fulfillment id>","trackingNumber":"<number>"},
-       "order":{"id":"<order id>","number":"<number>"}}'</code></pre>
-        <button class="copy" type="button">Copy</button>
-      </div>
-      <p>Swap the URL/header for <code class="inline">shippo/webhook</code> or
-        <code class="inline">stripe/webhook</code> if that's the missing one instead — check that
-        route's own secret-check code for its exact header/param name first.</p>
-    </div>
-
-    <div class="card" id="sym-duplicate">
-      <h3>Customer got the same email twice</h3>
-      <p>Every one of these three webhooks can be <b>redelivered</b> by its sender (Stripe, Saleor,
-        Shippo all retry on a non-2xx or a timeout) — duplicates are expected traffic, not a bug by
-        default. What matters is whether the idempotency guard for that specific side effect held:</p>
-      <ul>
-        <li><b>Confirmation email</b>: guarded by "checkout already completed" / "payment already
-          recorded" checks before the order is even created.</li>
-        <li><b>Shipped email + Shippo registration</b>: guarded by the
-          <code class="inline">shippo_track_registered</code> metadata flag matching the tracking
-          number — if this flag is missing or wasn't written (e.g. from a crash between sending
-          the email and saving the flag), a redelivery will resend.</li>
-      </ul>
-      <p>If a genuine duplicate happened: check whether the corresponding metadata flag is actually
-        set on the order now. If not, the guard has a real gap worth fixing in code — this is a bug
-        report, not a one-off to patch by hand.</p>
-      <div class="esc"><b>Shippo registration specifically is not idempotent</b> — registering the
-        same tracking number twice sends the customer duplicate carrier-status emails for the rest
-        of that shipment, permanently, with no way to undo it. If you suspect a double-registration
-        happened, that's worth flagging even if nothing looks broken yet.</div>
-    </div>
-
-    <div class="card" id="sym-stuck">
-      <h3>Order looks stuck / tracking isn't updating</h3>
-      <p>The visible timeline (<code class="inline">confirmed → packing → card_written → sealed →
-        shipped → in_transit → delivered</code>) is a mix: the first four are advanced by Daniya by
-        hand in the dashboard, the last three come from carrier data via the Shippo webhook.</p>
-      <ul>
-        <li><b>Stuck before "shipped"</b>: this is a manual stage — nothing automated should have
-          moved it. Check with Daniya whether she actually advanced it; this usually isn't a system
-          bug at all.</li>
-        <li><b>Stuck at "shipped", never reaches "in_transit"/"delivered"</b>: means Shippo tracking
-          was never successfully registered for this order — check for a
-          <b>SHIPPO REGISTRATION FAILED</b> line around when it shipped. If the tracking number is
-          a real carrier number and this is qa (test API key), this is expected — Shippo's test
-          mode only tracks its own sample numbers, not real ones.</li>
-      </ul>
-    </div>
-
-    <div class="card" id="sym-images">
-      <h3>Images broken on the storefront (box art, item photos)</h3>
-      <p>Historically caused by two separate, now-fixed infrastructure bugs — worth checking both
-        still hold before assuming a new cause:</p>
-      <ul>
-        <li>Django's Sites-framework domain reverting to <code class="inline">localhost:8000</code>
-          (e.g. after a database restore) — see <code class="inline">ops/set-site-domain.sh</code>.</li>
-        <li>Caddy's <code class="inline">/media/*</code> static-file block missing after a Caddyfile
-          change — self-hosted Saleor never serves media itself once <code class="inline">DEBUG=False</code>.</li>
-      </ul>
-      <p>Quick check: <code class="inline">curl -o /dev/null -w '%{http_code}\n' &lt;any image URL from the page&gt;</code> —
-        a 404 with the URL still containing <code class="inline">localhost:8000</code> means the
-        first cause; a 404 with the right domain means the second.</p>
-    </div>
-
-    <div class="card" id="sym-502">
-      <h3>Site or dashboard unreachable (502/504)</h3>
-      <p><code class="inline">docker compose ps</code> saying every container is healthy does
-        <b>not</b> prove Caddy can actually reach it — hit the real domains directly:</p>
-      <div class="codebox">
-        <pre><code>curl -s -o /dev/null -w "storefront %{http_code}\n" https://qa.mist.box/
-curl -s -o /dev/null -w "dashboard  %{http_code}\n" https://admin.qa.mist.box/
-curl -s -X POST https://api.qa.mist.box/graphql/ -H 'Content-Type: application/json' -d '{"query":"{shop{name}}"}'</code></pre>
-        <button class="copy" type="button">Copy</button>
-      </div>
-      <p>A 502 specifically on one service almost always means that service has no explicit
-        <code class="inline">networks:</code> entry in its compose definition and landed on
-        Docker's default network instead of <code class="inline">saleor-backend-tier</code> —
-        confirm with <code class="inline">docker inspect &lt;container&gt; --format '{{.NetworkSettings.Networks}}'</code>
-        and compare against Caddy's own.</p>
-    </div>
-
-    <div class="card" id="sym-paid-no-order">
-      <h3>Customer was charged but no order exists <span class="pill danger">urgent</span></h3>
-      <p>Look for <b>PAID BUT NOT ORDERED</b> in the logs — the log line includes the Stripe
-        session id and email, both needed to manually reconcile. This means Stripe successfully
-        charged the card but something threw while creating the Saleor order from that session.</p>
-      <div class="esc"><b>This is the one case in this guide where "let it resolve itself" is
-        wrong.</b> Stripe will not retry a completed checkout session. Pull the session from
-        Stripe's dashboard by id, read the storefront logs around that timestamp for the actual
-        exception, and either replay the order-creation logic manually or refund — don't leave a
-        charged customer without a box or a refund while investigating.</div>
-    </div>
-  </section>
-
-  <!-- ROOT CAUSES -->
-  <section class="block" id="rootcauses">
-    <div class="block__head"><span class="block__num">04</span><h2>Root causes seen more than once</h2></div>
-    <div class="card">
-      <h3>Webhook secret drift <span class="pill warn">seen: Sept 2026</span></h3>
-      <p>Saleor, Stripe and Shippo webhooks are each authenticated with a shared secret set
-        <b>at registration time</b> — none of them let you read that secret back out afterward to
-        compare it against 1Password. If the value in 1Password is ever rotated, or a registration
-        script used a different source than the environment's own secret, the two silently
-        disagree forever, with zero symptoms until an event actually arrives and gets rejected.</p>
-      <p><b>Fix</b>: delete and recreate the webhook with the current 1Password value — there is no
-        way to patch just the secret. For the Saleor one specifically, query
-        <code class="inline">{ app { webhooks { id name targetUrl isActive } } }</code> (the app
-        token's own <code class="inline">app</code> field — the top-level
-        <code class="inline">webhooks</code> query silently returns empty for an app token instead
-        of erroring), delete the match, recreate with
-        <code class="inline">customHeaders: {"X-Mistbox-Webhook-Secret": "&lt;current secret&gt;"}</code>.</p>
-    </div>
-    <div class="card">
-      <h3>Site-framework domain default</h3>
-      <p>Every fresh Saleor install defaults Django's Sites-framework domain to
-        <code class="inline">localhost:8000</code>, and nothing in a normal deploy touches it.
-        Every absolute media/thumbnail URL Saleor builds uses this value — wrong on any real
-        environment, but easy to miss because it can coincidentally still resolve to something on
-        whoever's own machine happens to have a service on port 8000.</p>
-    </div>
-    <div class="card">
-      <h3>Docker networking gaps</h3>
-      <p>A service with no explicit <code class="inline">networks:</code> key lands on Compose's
-        default network, invisible to anything explicitly on <code class="inline">saleor-backend-tier</code>.
-        Reads as a 502 with every container reporting healthy.</p>
-    </div>
-    <div class="card">
-      <h3>SSH agent key pileup</h3>
-      <p>An agent holding several keys can exhaust the server's <code class="inline">MaxAuthTries</code>
-        before ever offering the correct one — "Permission denied (publickey)" even though the
-        right key is loaded. Use <code class="inline">vmssh</code> (<code class="inline">ops/vmssh</code>),
-        which sidesteps this by fetching the key fresh and connecting with
-        <code class="inline">-o IdentitiesOnly=yes</code>.</p>
-    </div>
-  </section>
-
-  <!-- ESCALATE -->
-  <section class="block" id="escalate">
-    <div class="block__head"><span class="block__num">05</span><h2>When to stop and escalate</h2></div>
-    <div class="card">
-      <p>This guide covers triage a solo oncall can run alone. Stop and bring in Rustem directly
-        rather than continuing to dig when:</p>
-      <ul>
-        <li>A customer was <b>charged and has no order</b> (see above) — money is real, time matters.</li>
-        <li>A fix would require <b>rotating a secret used by more than one integration</b> (the
-          Saleor webhook secret is also read by other things — check <code class="inline">env/saleor.env.tpl</code>
-          before rotating anything, not just deleting/recreating one webhook).</li>
-        <li>You're about to run anything destructive — <code class="inline">docker compose down -v</code>,
-          a database restore, deleting a Saleor object — to fix a symptom rather than reading logs
-          further. Restoring a snapshot is the last resort in the QA Operations guide, not a first
-          troubleshooting step.</li>
-        <li>The same symptom recurs after a fix that should have been permanent — that usually means
-          the root cause wasn't what was fixed.</li>
-      </ul>
-    </div>
-  </section>
-
-  <footer>
-    <span>Mistbox · oncall playbook</span>
-    <span>See also: QA Operations (infra) · CLAUDE.md (dev-facing gotchas)</span>
-  </footer>
+  <footer>Mistbox · oncall playbook</footer>
 </div>
 
 <script>
-(function(){
-  document.querySelectorAll('.codebox').forEach(function(box){
-    var btn = box.querySelector('.copy');
-    var code = box.querySelector('code');
-    if (!btn || !code) return;
-    btn.addEventListener('click', function(){
-      var text = code.textContent;
-      function flash(){
-        var original = btn.textContent;
-        btn.textContent = 'Copied';
-        btn.classList.add('copied');
-        setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1400);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(flash, selectFallback);
-      } else {
-        selectFallback();
-      }
-      function selectFallback(){
-        var range = document.createRange();
-        range.selectNodeContents(code);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        btn.textContent = 'Select ⌘C';
-      }
-    });
+document.querySelectorAll('.codebox').forEach(function(box){
+  var btn = box.querySelector('.copy');
+  var code = box.querySelector('code');
+  if (!btn || !code) return;
+  btn.addEventListener('click', function(){
+    var text = code.textContent;
+    function flash(){
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1400);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(flash);
+    }
   });
-
-  var themeBtn = document.getElementById('themeBtn');
-  var root = document.documentElement;
-  try{ var saved = localStorage.getItem('mb-theme'); if (saved) root.setAttribute('data-theme', saved); }catch(e){}
-  function currentTheme(){
-    var attr = root.getAttribute('data-theme');
-    if (attr) return attr;
-    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-  }
-  if (themeBtn) themeBtn.addEventListener('click', function(){
-    var next = currentTheme() === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('mb-theme', next); }catch(e){}
-  });
-})();
+});
 </script>
