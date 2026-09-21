@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# vmssh — SSH into a Mistbox VM without the multi-key agent lockout.
+#
+#   vmssh                  # deploy@<qa host>, interactive shell
+#   vmssh root             # root@<qa host>
+#   vmssh deploy 'cd ~/code/mistbox && docker compose -f docker-compose.yml -f docker-compose.qa.yml ps'
+#
+# Fetches the deploy key fresh from 1Password every run and deletes it on
+# exit — no private key ever sits on disk between calls. Connects with
+# `-o IdentitiesOnly=yes` so an SSH agent holding other keys can't exhaust
+# the server's MaxAuthTries before this one is ever offered, which is the
+# actual cause behind "Permission denied (publickey)" even when the right
+# key is loaded — see CLAUDE.md.
+#
+# Requires: `op` signed in (this reads op://Mistbox/mistbox-deploy).
+set -euo pipefail
+
+# Only one VM exists today. Add more as `case "$host_alias" in ... esac` if
+# a second one (prod) ever comes up, rather than a second copy of this file.
+HOST="89.167.71.80"
+
+USER_NAME="${1:-deploy}"
+[ $# -gt 0 ] && shift
+
+KEY="$(mktemp /tmp/mistbox-deploy-key.XXXXXX)"
+trap 'rm -f "$KEY"' EXIT
+
+op read "op://Mistbox/mistbox-deploy/private key?ssh-format=openssh" > "$KEY"
+chmod 600 "$KEY"
+
+exec ssh -o IdentitiesOnly=yes -i "$KEY" "${USER_NAME}@${HOST}" "$@"
